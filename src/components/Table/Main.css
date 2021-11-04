@@ -1,0 +1,149 @@
+/* @import '.\\..\\..\\..\\node_modules\\@scania\\colour\\dist\\scss\\colour.scss'; */
+/* @import './../../../node_modules/@scania/colour/dist/scss/colour.scss'; */
+
+
+.content-wrapper {
+  padding-top: var(--sdds-spacing-element-24);
+  padding-bottom: var(--sdds-spacing-element-24);
+}
+
+.lead-head {
+  margin-bottom: var(--sdds-spacing-element-16);
+}
+
+.section-wrapper {
+  margin-top: var(--sdds-spacing-element-32);
+}
+
+.component-wrapper {
+  padding-bottom: var(--sdds-spacing-element-24);
+}
+
+.table-container {
+  overflow: auto;
+  max-height: 700px;
+}
+
+table {
+  margin: auto;
+  text-align: left;  
+  border: 1px solid black;
+  border-spacing: 0;
+  width: 100%;
+  position: relative;
+}
+
+table tr td:first-child {
+  text-align: left;
+}
+
+.selectable-row:hover{
+  cursor: pointer;
+}
+
+.selected-row {
+  color: white;
+  font-weight: 900;
+  background-color: #97999B;
+}
+
+td {
+  border: 1px solid black;    
+  padding: 5px;
+}
+
+th {
+  color: #FFFFFF;
+  background-color:	#041E42;
+  font-size: 17px;
+  border: 1px solid black;
+  padding: 15px;
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  align-self: flex-start; /* <-- this is the fix */
+  z-index: 10;
+}
+
+/* 
+table.fix-first-column td:first-child {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  justify-self: flex-start;
+  background-color: #C1C6D8;
+}
+
+table.fix-first-column th:first-child {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  justify-self: flex-start;
+  background-color: #C1C6D8;
+  z-index: 11;
+} */
+
+/* 
+table.fix-first-column td:nth-child(3) {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 85.02px;
+  justify-self: flex-start;
+  background-color: #C1C6D8;
+} */
+
+td.fixed-column-cell {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  justify-self: flex-start; /* <-- this is the fix */
+  z-index: 11;
+}
+
+th.fixed-column-head-cell {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  justify-self: flex-start; /* <-- this is the fix */
+  z-index: 11;
+}
+
+.my-div {
+  background-color: #C1C6D8;
+}
+
+.wrap-text {
+  height: auto;
+}
+
+.copy-row-button-cell {
+  padding: 15px;
+  min-width: 155px;
+  width: 155px;
+}
+
+.center-items {
+  display: flex;
+  justify-content: center;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.checkbox-container {
+  display: flex;
+  height: 90px !important;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
