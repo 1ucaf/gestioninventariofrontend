@@ -1,61 +1,79 @@
-import { DataGrid } from '@mui/x-data-grid';
 import { useEffect, useState } from "react"
 import { getAllEquiposApiCall } from "../../api/Equipos";
 // import Table from '../../components/Table/Table';
+import DataTable from 'react-data-table-component';
+import TablePageContainer from "../../components/Containers/TablePageContainer";
+import { styles } from "../../styles/Styles";
+import { useHistory } from "react-router";
 
 const Equipos = () => {
+    const history = useHistory();
     const [data, setData] = useState([]);
-
     useEffect(()=>{
         getAllEquiposApiCall()
         .then( data => {
             setData(data.map(elemento => {
-                return {...elemento, id: elemento.EquipoId}
+                return {...elemento,
+                    id: elemento.EquipoId,
+                    VencimientoGarantia: elemento.VencimientoGarantia.split("T")[0],
+                    Adquisicion: elemento.Adquisicion.split("T")[0]
+                }
             }));
         })
     }, [])
 
-    useEffect(()=>{
-        console.log(data.toString());
-    }, [data])
-
-    useEffect(()=>{
-        console.log(data.toString());
-    }, [])
-
     const columns = [
         {
-            field: 'EquipoId',
-            headerName: 'EquipoId',
+            selector: row => row.EquipoId,
+            name: 'EquipoId',
+            width: "90px",
+            right: true,
         },
         {
-            field: 'Descripcion',
-            headerName: 'Descripcion',
+            selector: row => row.Descripcion,
+            name: 'Descripcion',
+            width: "100px"
         },
         {
-            field: 'Adquisicion',
-            headerName: 'Fecha de Adquisición',
+            selector: row => row.Adquisicion,
+            name: 'Fecha de Adquisición',
+            width: "160px",
+            center: true,
         },
         {
-            field: 'OficinaId',
-            headerName: 'Número de Oficina',
+            selector: row => row.OficinaId,
+            name: 'Número de Oficina',
+            width: "150px",
+            right: true,
         },
         {
-            field: 'ProveedorId',
-            headerName: 'Id de Proveedor',
+            selector: row => row.ProveedorId,
+            name: 'Id de Proveedor',
+            right: true,
         },
         {
-            field: 'VencimientoGarantia',
-            headerName: 'Vencimiento de Garantia',
+            selector: row => row.VencimientoGarantia,
+            name: 'Vencimiento de Garantia',
+            width: "180px",
+            center: true,
         },
     ]
+
+    const onRowClicked = (row, event)=>{
+        console.log(row);
+        history.push("/Equipos/"+row.EquipoId);
+        }
+
     return (
-        <div style={{ height: 400, width: '100%' }}>
-            <DataGrid
-                rows={ data }
+        <TablePageContainer>
+            <DataTable
+                data={ data }
                 columns={columns}
+                customStyles={styles}
+                onRowClicked={onRowClicked}
+                pointerOnHover
             />
-        </div>
+        </TablePageContainer>
     )
 }
 
