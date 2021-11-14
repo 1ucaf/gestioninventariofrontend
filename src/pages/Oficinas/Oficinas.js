@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllEquiposApiCall, getAllOficinasApiCall } from "../../api/Oficinas";
+import { getAllOficinasApiCall } from "../../api/Oficinas";
 import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
@@ -36,16 +36,15 @@ const Oficinas = () => {
             width: "150px"
         },
     ]
-    
+
     return (
         <TablePageContainer>
             <DataTable
                 data={ data }
                 columns={columns}
                 customStyles={styles}
-                onRowClicked={(row, event)=>{console.log(row);}}
-                pointerOnHover
                 onRowClicked={onRowClicked}
+                pointerOnHover
             />
         </TablePageContainer>
     )
