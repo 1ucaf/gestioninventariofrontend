@@ -8,6 +8,8 @@ import { EquipoDetail } from "../pages/Equipos/EquipoDetail";
 import Equipos from "../pages/Equipos/Equipos";
 import OficinaDetail from "../pages/Oficinas/OficinaDetail";
 import Oficinas from "../pages/Oficinas/Oficinas";
+import ProveedorDetails from "../pages/Proveedores/ProveedorDetails";
+import Proveedores from "../pages/Proveedores/Proveedores";
 
 const routes = [
     {
@@ -41,21 +43,36 @@ const Routes = () => {
         <Router>
             <NavBar routes={routes}/>
             <Switch>
+
+
+                
                 <Route exact path="/Proveedores">
-                    <Equipos />
+                    <Proveedores />
                 </Route>
+                <Route exact path="/Proveedores/:ProveedorId">
+                    <ProveedorDetails />
+                </Route>
+
                 <Route exact path="/Oficinas">
                     <Oficinas />
                 </Route>
                 <Route path="/Oficinas/:oficinaId">
                     <OficinaDetail />
                 </Route>
+
                 <Route exact path="/Equipos">
                     <Equipos />
                 </Route>
                 <Route path="/Equipos/:equipoId">
                     <EquipoDetail />
                 </Route>
+
+
+
+
+
+
+
                 <Route exact path="/Periféricos">
                     <Equipos />
                 </Route>

@@ -62,7 +62,7 @@ const Equipos = () => {
     const onRowClicked = (row, event)=>{
         console.log(row);
         history.push("/Equipos/"+row.EquipoId);
-        }
+    }
 
     return (
         <TablePageContainer>

@@ -1,54 +1,59 @@
 import { useEffect, useState } from "react"
-import { getAllEquiposApiCall, getAllOficinasApiCall } from "../../api/Oficinas";
+import { getAllProveedoresApiCall } from "../../api/Proveedores";
+// import Table from '../../components/Table/Table';
 import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
 import { useHistory } from "react-router";
 
-const Oficinas = () => {
+const Proveedores = () => {
     const history = useHistory();
     const [data, setData] = useState([]);
-
     useEffect(()=>{
-        getAllOficinasApiCall()
+        getAllProveedoresApiCall()
         .then( data => {
-            setData(data);
+            setData(data.map(elemento => {
+                return {...elemento,
+                }
+            }));
         })
     }, [])
-
+    
     useEffect(()=>{
         console.log(data);
     }, [data])
 
-    const onRowClicked = (row, event)=>{
-        console.log(row);
-        history.push("/Oficina/"+row.OficinaId);
-    }
-
     const columns = [
         {
-            selector: row => row.OficinaId,
-            name: 'Id de Oficina',
+            selector: row => row.ProveedorId,
+            name: 'Id de Proveedor',
         },
         {
-            selector: row => row.Nombre,
-            name: 'Nombre de Oficina',
-            width: "150px"
+            selector: row => row.CUIT,
+            name: 'CUIT',
+        },
+        {
+            selector: row => row.RazonSocial,
+            name: 'Razon Social',
+            width: "500px"
         },
     ]
-    
+
+    const onRowClicked = (row, event)=>{
+        console.log(row);
+        history.push("/Proveedor/" + row.ProveedorId);
+    }
     return (
         <TablePageContainer>
             <DataTable
                 data={ data }
                 columns={columns}
                 customStyles={styles}
-                onRowClicked={(row, event)=>{console.log(row);}}
-                pointerOnHover
                 onRowClicked={onRowClicked}
+                pointerOnHover
             />
         </TablePageContainer>
     )
 }
 
-export default Oficinas
+export default Proveedores
