@@ -9,6 +9,7 @@ import Equipos from "../pages/Equipos/Equipos";
 import OficinaDetail from "../pages/Oficinas/OficinaDetail";
 import Oficinas from "../pages/Oficinas/Oficinas";
 import Perifericos from "../pages/Perifericos/Perifericos";
+import PerifericoDetail from "../pages/Perifericos/PerificoDetail";
 import ProveedorDetails from "../pages/Proveedores/ProveedorDetails";
 import Proveedores from "../pages/Proveedores/Proveedores";
 
@@ -68,15 +69,20 @@ const Routes = () => {
                     <EquipoDetail />
                 </Route>
 
+                
 
 
 
 
 
 
-                <Route exact path="/Periféricos">
+                <Route exact path="/Perifericos">
                     <Perifericos />
                 </Route>
+                <Route path="/Perifericos/:perifericoId">
+                    <PerifericoDetail />
+                </Route>
+
                 <Route exact path="/Registros">
                     <Equipos />
                 </Route>

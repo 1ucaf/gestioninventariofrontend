@@ -1,7 +1,7 @@
 import { useParams } from "react-router"
 
-const OficinaDetail = () => {
-    const { oficinaId } = useParams();
+const PerifericoDetail = () => {
+    const { perifericoId } = useParams();
     return (
         <div>
             
@@ -9,4 +9,4 @@ const OficinaDetail = () => {
     )
 }
 
-export default OficinaDetail
+export default PerifericoDetail
