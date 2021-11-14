@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const rootApiRoute = "http://localhost:54156"
+const rootApiRoute = "https://gestorinventariobackendtfi.azurewebsites.net"
 
 export const getAllProveedoresApiCall = async () => {
     try {

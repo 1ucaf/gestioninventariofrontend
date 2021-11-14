@@ -9,7 +9,7 @@ import Equipos from "../pages/Equipos/Equipos";
 import OficinaDetail from "../pages/Oficinas/OficinaDetail";
 import Oficinas from "../pages/Oficinas/Oficinas";
 import Perifericos from "../pages/Perifericos/Perifericos";
-import PerifericoDetail from "../pages/Perifericos/PerifericoDetails";
+import PerifericoDetail from "../pages/Perifericos/PerificoDetail";
 import ProveedorDetails from "../pages/Proveedores/ProveedorDetails";
 import Proveedores from "../pages/Proveedores/Proveedores";
 import Registros from "../pages/Registros/Registros";
