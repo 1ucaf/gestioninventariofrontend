@@ -8,6 +8,7 @@ import { EquipoDetail } from "../pages/Equipos/EquipoDetail";
 import Equipos from "../pages/Equipos/Equipos";
 import OficinaDetail from "../pages/Oficinas/OficinaDetail";
 import Oficinas from "../pages/Oficinas/Oficinas";
+import Perifericos from "../pages/Perifericos/Perifericos";
 import ProveedorDetails from "../pages/Proveedores/ProveedorDetails";
 import Proveedores from "../pages/Proveedores/Proveedores";
 
@@ -74,7 +75,7 @@ const Routes = () => {
 
 
                 <Route exact path="/Periféricos">
-                    <Equipos />
+                    <Perifericos />
                 </Route>
                 <Route exact path="/Registros">
                     <Equipos />
