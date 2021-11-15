@@ -71,13 +71,6 @@ const Routes = () => {
                     <EquipoDetail />
                 </Route>
 
-                
-
-
-
-
-
-
                 <Route exact path="/Perifericos">
                     <Perifericos />
                 </Route>

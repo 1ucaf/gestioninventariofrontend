@@ -6,4 +6,9 @@ export const styles = {
             borderRight: "1px solid",
         },
     },
+    formPages: {
+        style: {
+            marginTop: '20px',
+        }
+    }
 };
