@@ -14,6 +14,8 @@ import ProveedorDetails from "../pages/Proveedores/ProveedorDetails";
 import Proveedores from "../pages/Proveedores/Proveedores";
 import Registros from "../pages/Registros/Registros";
 import RegistroDetail from "../pages/Registros/RegistroDetail";
+import Usuarios from "../pages/Usuarios/Usuarios";
+import { UsuarioDetail } from "../pages/Usuarios/UsuarioDetail";
 
 const routes = [
     {
@@ -73,6 +75,8 @@ const Routes = () => {
 
                 
 
+                
+
 
 
 
@@ -90,6 +94,13 @@ const Routes = () => {
                 </Route>
                 <Route exact path="/Registros/:registrosId">
                     <RegistroDetail />
+                </Route>
+
+                <Route exact path="/Usuarios">
+                    <Usuarios />
+                </Route>
+                <Route path="/Usuarios/:usuarioId">
+                    <UsuarioDetail />
                 </Route>
             </Switch>
         </Router>
