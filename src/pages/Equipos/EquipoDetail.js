@@ -54,30 +54,42 @@ export const EquipoDetail = () => {
     },[])
 
     const onChangeAdquisicionDate = newValue => {
-        // console.log(newValue);
         setEquipo({...equipo, Adquisicion: newValue});
     }
 
+    const onChangeVencimientoGarantiaDate = newValue => {
+        setEquipo({...equipo, VencimientoGarantia: newValue});
+    }
 
-    useEffect(()=>{
-        console.log(equipo?.Adquisicion);
-    },[equipo])
+    const onChangeDescripcion = event => {
+        setEquipo({...equipo, Descripcion: event.target.value});
+    }
 
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
+                <h1 style={{textAlign: "center"}}>Detalles de Equipo</h1>
                 <FormPageContainer>
                     <FormControl>
                         <small> Descripción </small>
-                        <Input id="my-input" aria-describedby="my-helper-text" value={equipo?.Descripcion} />
+                        <Input onChange={onChangeDescripcion} id="my-input" aria-describedby="my-helper-text" value={equipo?.Descripcion} />
                     </FormControl>
                     <FormControl>
                         <small> Fecha de Adquisición </small>
                         <DesktopDatePicker
-                            inputFormat="MM/dd/yyyy"
+                            inputFormat="dd/MM/yyyy"
                             value={equipo?.Adquisicion ? equipo.Adquisicion : ""}
                             onChange={onChangeAdquisicionDate}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </FormControl>
+                    <FormControl>
+                        <small> Fecha de Vencimiento de Garantía: </small>
+                        <DesktopDatePicker
+                            inputFormat="dd/MM/yyyy"
+                            value={equipo?.VencimientoGarantia ? equipo.VencimientoGarantia : ""}
+                            onChange={onChangeVencimientoGarantiaDate}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </FormControl>

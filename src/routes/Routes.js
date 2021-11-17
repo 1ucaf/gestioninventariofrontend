@@ -30,7 +30,7 @@ const routes = [
     },
     {
         text: "Periféricos",
-        path: "/Periféricos"
+        path: "/Perifericos"
     },
     {
         text: "Registros",
