@@ -41,7 +41,7 @@ const Proveedores = () => {
 
     const onRowClicked = (row, event)=>{
         console.log(row);
-        history.push("/Proveedor/" + row.ProveedorId);
+        history.push("/Proveedores/" + row.ProveedorId);
     }
     return (
         <TablePageContainer>

@@ -19,3 +19,16 @@ export const getProveedorApiCall = async (proveedorId) => {
         throw error;
     }
 }
+
+export const saveProveedorApiCall = async proveedor => {
+    try {
+        const body = {
+            ProveedorId: proveedor.proveedorId,
+            RazonSocial: proveedor.RazonSocial,
+        }
+        const response = await axios.put(rootApiRoute + "/Proveedors/?id=" + proveedor.ProveedorId , body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

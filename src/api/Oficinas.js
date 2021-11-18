@@ -19,3 +19,16 @@ export const getOficinaApiCall = async (oficinaId) => {
         throw error;
     }
 }
+
+export const saveOficinaApiCall = async oficina => {
+    try {
+        const body = {
+            OficinaId: oficina.OficinaId,
+            Nombre: oficina.Nombre,
+        }
+        const response = await axios.put(rootApiRoute + "/Oficinas/?id=" + oficina.OficinaId, body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
