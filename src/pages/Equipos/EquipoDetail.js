@@ -7,7 +7,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { getEquipoApiCall } from "../../api/Equipos";
+import { getEquipoApiCall, saveEquipoApiCall } from "../../api/Equipos";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import { getAllOficinasApiCall } from "../../api/Oficinas";
@@ -29,6 +29,7 @@ export const EquipoDetail = () => {
         message: "",
         type: "",
         show: false,
+        afterCloseModal: ()=>{}
     })
     
     const onCloseModal = ()=>{
@@ -41,6 +42,7 @@ export const EquipoDetail = () => {
     }
 
     const onError = e => {
+        console.log(e);
         setModalProps({
             ...modalProps,
             title: "ERROR!",
@@ -110,10 +112,21 @@ export const EquipoDetail = () => {
     }
 
     const onSave = () => {
-        
+        saveEquipoApiCall(equipo)
+        .then( response => {
+            setModalProps({
+                ...modalProps,
+                title: "Guardado!",
+                show: true,
+                type: "",
+                message: "Equipo guardado con éxito!",
+                afterCloseModal: goBack
+            })
+        })
+        .catch(onError);
     }
 
-    const onCancel = () => {
+    const goBack = () => {
         history.push("/Equipos");
     }
 
@@ -194,7 +207,7 @@ export const EquipoDetail = () => {
                     }
                     </FormGroup>
                     <FormButtonsContainer>
-                        <Button variant="outlined" size="large" onClick={onCancel}>Cancelar</Button>
+                        <Button variant="outlined" size="large" onClick={goBack}>Cancelar</Button>
                         <Button variant="contained" size="large" onClick={onSave}>Guardar</Button>
                     </FormButtonsContainer>
                 </FormPageContainer>

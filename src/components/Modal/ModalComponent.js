@@ -6,7 +6,7 @@ const ModalComponent = ({modalProps, onCloseModal}) => {
             isOpen={modalProps.show}
             onRequestClose={modalProps.onCloseModal}
         >
-            <button onClick={onCloseModal}>close</button>
+            <button onClick={()=>{onCloseModal(); modalProps.afterCloseModal();}}>close</button>
             <h1>{modalProps.title}</h1>
             <p>{modalProps.message}</p>
         </Modal>
