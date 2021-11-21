@@ -7,7 +7,7 @@ import FormGroup from "../../components/Containers/FormGroup";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { createRegistroApiCall, getRegistroApiCall, saveRegistroApiCall} from "../../api/Registros";
+import { createRegistroApiCall, deleteRegistroApiCall, getRegistroApiCall, saveRegistroApiCall} from "../../api/Registros";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
@@ -119,6 +119,32 @@ export const RegistroDetail = (props) => {
         history.push("/registros");
     }
 
+    const onDelete = () => {
+        deleteRegistroApiCall(registro.RegistroId)
+        .then(data => {
+            console.log(data);
+            setModalProps({
+                ...modalProps,
+                title: "Eliminado!",
+                show: true,
+                type: "",
+                message: "Registro Eliminado con éxito!!!",
+                afterCloseModal: goBack,
+            })
+        })
+    }
+
+    const onConfirmDelete = () => {
+        setModalProps({
+            ...modalProps,
+            title: "Borrar",
+            show: true,
+            type: "delete",
+            message: "Está seguro que desea eliminar el registro?",
+            onDelete: onDelete,
+        })
+    }
+
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -127,7 +153,7 @@ export const RegistroDetail = (props) => {
                 <FormPageContainer>
 
                     <FormGroup>
-                        <Button variant="contained" aria-label="delete" size="large" color="error">
+                        <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
                             Eliminar
                             <DeleteIcon fontSize="inherit" />
                         </Button>
@@ -162,15 +188,15 @@ export const RegistroDetail = (props) => {
                             </FormControl>
                         </Box> : <></>
                     }
-                        <FormControl sx={{ minWidth: "40%" }}>
-                            <small> Fecha de la Incidencia: </small>
-                            <DesktopDatePicker
-                                inputFormat="dd/MM/yyyy"
-                                value={registro?.Fecha ? registro.Fecha : ""}
-                                onChange={onChangeFecha}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                        </FormControl>
+                    <FormControl sx={{ minWidth: "40%" }}>
+                        <small> Fecha de la Incidencia: </small>
+                        <DesktopDatePicker
+                            inputFormat="dd/MM/yyyy"
+                            value={registro?.Fecha ? registro.Fecha : ""}
+                            onChange={onChangeFecha}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </FormControl>
                     </FormGroup>
                                         
                     <FormButtonsContainer>

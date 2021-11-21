@@ -50,3 +50,12 @@ export const createRegistroApiCall = async registro => {
         throw error;
     }
 }
+
+export const deleteRegistroApiCall = async registroId => {
+    try {
+        const response = await axios.delete(rootApiRoute + "/Registroes/?id=" + registroId);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
