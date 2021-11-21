@@ -4,6 +4,8 @@ import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
 import { useHistory } from "react-router";
+import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
+import { Button } from "@mui/material";
 
 const Registros = () => {
     const history = useHistory();
@@ -22,7 +24,7 @@ const Registros = () => {
 
     const onRowClicked = (row, event)=>{
         console.log(row);
-        history.push("/Registro/"+row.RegistroId);
+        history.push("/Registros/update/"+row.RegistroId);
     }
 
     const columns = [
@@ -43,8 +45,16 @@ const Registros = () => {
 
     ]
 
+    const onCreateNew = (e)=>{
+        e.preventDefault();
+        history.push("/registros/create")
+    }
+
     return (
         <TablePageContainer>
+            <FormButtonsContainer>
+                <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Registro</Button>
+            </FormButtonsContainer>
             <DataTable
                 data={ data }
                 columns={columns}

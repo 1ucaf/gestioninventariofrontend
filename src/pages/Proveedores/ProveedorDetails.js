@@ -58,6 +58,9 @@ export const ProveedorDetail = () => {
     const onChangeRazonSocial = event => {
         setProveedor({...proveedor, RazonSocial: event.target.value});
     }
+    const onChangeCUIT = event => {
+        setProveedor({...proveedor, CUIT: event.target.value});
+    }
    
     const onSave = () => {
         saveProveedorApiCall(proveedor)
@@ -78,9 +81,9 @@ export const ProveedorDetail = () => {
         history.push("/Proveedores");
     }
 
-    /*<Modal modalProps={modalProps} onCloseModal={onCloseModal}/>*/
     return (
         <>
+            <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
             <h1 style={{textAlign: "center"}}>Detalles de los Proveedores</h1>
             <FormPageContainer>
                 <FormGroup>
@@ -89,7 +92,12 @@ export const ProveedorDetail = () => {
                         <Input onChange={onChangeRazonSocial} id="my-input" aria-describedby="my-helper-text" value={proveedor? proveedor.RazonSocial : ""} />
                     </FormControl>
                 </FormGroup>
-                                    
+                <FormGroup>
+                    <FormControl sx={{ minWidth: "100%" }}>
+                        <small> CUIT </small>
+                        <Input onChange={onChangeCUIT} id="my-input" aria-describedby="my-helper-text" value={proveedor? proveedor.CUIT : ""} />
+                    </FormControl>
+                </FormGroup>
                 <FormButtonsContainer>
                     <Button variant="outlined" size="large" onClick={goBack}>Cancelar</Button>
                     <Button variant="contained" size="large" onClick={onSave}>Guardar</Button>

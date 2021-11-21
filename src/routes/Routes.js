@@ -55,7 +55,7 @@ const Routes = () => {
                 <Route exact path="/Proveedores">
                     <Proveedores />
                 </Route>
-                <Route exact path="/Proveedores/:ProveedorId">
+                <Route exact path="/Proveedores/:proveedorId">
                     <ProveedorDetails />
                 </Route>
 
@@ -83,8 +83,14 @@ const Routes = () => {
                 <Route exact path="/Registros">
                     <Registros />
                 </Route>
-                <Route exact path="/Registros/:registrosId">
-                    <RegistroDetail />
+                <Route path="/Registros/update/:registroId">
+                    {()=>{
+                        console.log("holis");
+                        return <RegistroDetail />
+                    }}
+                </Route>
+                <Route path="/Registros/create">
+                    <RegistroDetail isNew={true} />
                 </Route>
 
                 <Route exact path="/Usuarios">
