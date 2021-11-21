@@ -19,7 +19,7 @@ export const RegistroDetail = (props) => {
 
     const history = useHistory();
 
-    const [registro, setRegistro] = useState({});
+    const [registro, setRegistro] = useState();
     const [equipos, setEquipos] = useState();
     
     const [modalProps, setModalProps] = useState({
@@ -64,6 +64,8 @@ export const RegistroDetail = (props) => {
                 setRegistro(data);
             })
             .catch(onError);
+        } else {
+            setRegistro({});
         }
     },[])
     
@@ -129,7 +131,6 @@ export const RegistroDetail = (props) => {
                         </FormControl>
                     </FormGroup>
                     <FormGroup>
-                        
                     {
                         equipos && registro ?
                         <Box sx={{ minWidth: "40%" }}>
