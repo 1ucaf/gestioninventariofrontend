@@ -4,7 +4,7 @@ import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
 import { useHistory } from "react-router";
-import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
+import TablePageButtonsContainer from "../../components/Containers/TablePageButtonsContainer";
 import { Button } from "@mui/material";
 
 const Registros = () => {
@@ -52,9 +52,9 @@ const Registros = () => {
 
     return (
         <TablePageContainer>
-            <FormButtonsContainer>
+            <TablePageButtonsContainer>
                 <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Registro</Button>
-            </FormButtonsContainer>
+            </TablePageButtonsContainer>
             <DataTable
                 data={ data }
                 columns={columns}

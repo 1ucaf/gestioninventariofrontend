@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { getAllEquiposApiCall } from "../../api/Equipos";
-// import Table from '../../components/Table/Table';
+import TablePageButtonsContainer from "../../components/Containers/TablePageButtonsContainer";
 import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
 import { useHistory } from "react-router";
+import { Button } from "@mui/material";
 
 const Equipos = () => {
     const history = useHistory();
@@ -61,11 +62,19 @@ const Equipos = () => {
 
     const onRowClicked = (row, event)=>{
         console.log(row);
-        history.push("/Equipos/"+row.EquipoId);
+        history.push("/Equipos/update/"+row.EquipoId);
+    }
+
+    const onCreateNew = (e)=>{
+        e.preventDefault();
+        history.push("/equipos/create")
     }
 
     return (
         <TablePageContainer>
+            <TablePageButtonsContainer>
+                <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Equipo</Button>
+            </TablePageButtonsContainer>
             <DataTable
                 data={ data }
                 columns={columns}

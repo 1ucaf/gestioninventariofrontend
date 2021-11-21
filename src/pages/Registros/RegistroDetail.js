@@ -56,17 +56,15 @@ export const RegistroDetail = (props) => {
             console.log("EQUIPOS: ", data);
             setEquipos(data);
         })
-        .then((_=> {
-            if(!props.isNew) {
-                getRegistroApiCall(registroId)
-                .then(data=> {
-                    console.log("REGISTRO: ", data);
-                    setRegistro(data);
-                })
-                .catch(onError);
-            }
-        }))
         .catch(onError);
+        if(!props.isNew) {
+            getRegistroApiCall(registroId)
+            .then(data=> {
+                console.log("REGISTRO: ", data);
+                setRegistro(data);
+            })
+            .catch(onError);
+        }
     },[])
     
     const onChangeDescripcion = event => {
@@ -127,7 +125,7 @@ export const RegistroDetail = (props) => {
                     <FormGroup>
                         <FormControl sx={{ minWidth: "100%" }}>
                             <small> Descripción </small>
-                            <Input onChange={onChangeDescripcion} id="my-input" aria-describedby="my-helper-text" value={registro? registro.Nombre : ""} />
+                            <Input onChange={onChangeDescripcion} id="my-input" aria-describedby="my-helper-text" value={registro? registro.Descripcion : ""} />
                         </FormControl>
                     </FormGroup>
                     <FormGroup>

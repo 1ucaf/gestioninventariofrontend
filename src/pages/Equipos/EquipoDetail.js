@@ -7,7 +7,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { getEquipoApiCall, saveEquipoApiCall } from "../../api/Equipos";
+import { createEquipoApiCall, getEquipoApiCall, saveEquipoApiCall } from "../../api/Equipos";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import { getAllOficinasApiCall } from "../../api/Oficinas";
@@ -15,7 +15,7 @@ import { getAllProveedoresApiCall } from "../../api/Proveedores";
 import { Box } from "@mui/system";
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
 
-export const EquipoDetail = () => {
+export const EquipoDetail = (props) => {
     const { equipoId } = useParams();
 
     const history = useHistory();
@@ -53,17 +53,21 @@ export const EquipoDetail = () => {
     }
 
     useEffect(()=>{
-        getEquipoApiCall(equipoId)
-        .then(data=> {
-            console.log("EQUIPO: ", data);
-            setEquipo({
-                ...data, 
-                Adquisicion: new Date(data.Adquisicion)
+        if(!props.isNew) {
+            getEquipoApiCall(equipoId)
+            .then(data=> {
+                console.log("EQUIPO: ", data);
+                setEquipo({
+                    ...data, 
+                    Adquisicion: new Date(data.Adquisicion)
+                });
+            })
+            .catch(e=>{
+                onError(e);
             });
-        })
-        .catch(e=>{
-            onError(e);
-        });
+        } else {
+            setEquipo({});
+        }
 
         getAllOficinasApiCall()
         .then(data=> {
@@ -112,18 +116,33 @@ export const EquipoDetail = () => {
     }
 
     const onSave = () => {
-        saveEquipoApiCall(equipo)
-        .then( response => {
-            setModalProps({
-                ...modalProps,
-                title: "Guardado!",
-                show: true,
-                type: "",
-                message: "Equipo guardado con éxito!",
-                afterCloseModal: goBack
+        if(!props.isNew) {
+            saveEquipoApiCall(equipo)
+            .then( response => {
+                setModalProps({
+                    ...modalProps,
+                    title: "Guardado!",
+                    show: true,
+                    type: "",
+                    message: "Equipo guardado con éxito!",
+                    afterCloseModal: goBack
+                })
             })
-        })
-        .catch(onError);
+            .catch(onError);
+        } else {
+            createEquipoApiCall(equipo)
+            .then( response => {
+                setModalProps({
+                    ...modalProps,
+                    title: "Guardado!",
+                    show: true,
+                    type: "",
+                    message: "Equipo guardado con éxito!",
+                    afterCloseModal: goBack
+                })
+            })
+            .catch(onError);
+        }
     }
 
     const goBack = () => {

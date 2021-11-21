@@ -37,3 +37,21 @@ export const saveEquipoApiCall = async equipo => {
         throw error;
     }
 }
+
+
+export const createEquipoApiCall = async equipo => {
+    try {
+        const body = {
+            EquipoId: equipo.EquipoId,
+            Descripcion: equipo.Descripcion,
+            Adquisicion: equipo.Adquisicion,
+            VencimientoGarantia: equipo.VencimientoGarantia,
+            ProveedorId: equipo.ProveedorId,
+            OficinaId: equipo.OficinaId
+        }
+        const response = await axios.post(rootApiRoute + "/Equipos/?id=" + equipo.EquipoId, body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
