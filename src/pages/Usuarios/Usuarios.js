@@ -18,28 +18,28 @@ const Usuarios = () => {
 
     const columns = [
         {
-            selector: row => row.Username,
+            selector: row => row.UserName,
             name: 'Username',
             width: "90px",
             right: true,
         },
         {
-            selector: row => row.email,
+            selector: row => row.Email,
             name: 'Email',
             width: "90px"
         },
         {
-            selector: row => row.password,
-            name: 'Password',
+            selector: row => row.Equipo,
+            name: 'Equipo',
             width: "90px"
         },
         {
-            selector: row => row.nombre,
+            selector: row => row.Nombre,
             name: 'Nombre',
             width: "90px"
         },
         {
-            selector: row => row.apellido,
+            selector: row => row.Apellido,
             name: 'Apellido',
             width: "90px"
         }
@@ -47,7 +47,7 @@ const Usuarios = () => {
 
     const onRowClicked = (row, event)=>{
         console.log(row);
-        history.push("/Usuarios/"+row.UsuarioId);
+        history.push("/Usuarios/"+row.UserName);
     }
 
     return (

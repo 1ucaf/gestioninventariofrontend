@@ -19,3 +19,17 @@ export const getPerifericoApiCall = async (perifericoId) => {
         throw error;
     }
 }
+
+export const savePerifericoApiCall = async periferico => {
+    try {
+        const body = {
+            PerifericoId: periferico.PerifericoId,
+            EquipoId: periferico.EquipoId,
+            Descripcion: periferico.Descripcion
+        }
+        const response = await axios.put(rootApiRoute + "/Perifericoes/?id=" + periferico.PerifericoId, body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

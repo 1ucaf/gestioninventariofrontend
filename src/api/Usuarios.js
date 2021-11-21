@@ -19,3 +19,18 @@ export const getUsuarioApiCall = async (userId) => {
         throw error;
     }
 }
+
+export const saveUsuarioApiCall = async usuario => {
+    try {
+        const body = {
+            UserName:usuario.UserName,
+            Nombre: usuario.Nombre,
+            Apellido: usuario.Apellido,
+            Email: usuario.Email            
+        }
+        const response = await axios.put(rootApiRoute + "/Users/?id=" + usuario.UserName, body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

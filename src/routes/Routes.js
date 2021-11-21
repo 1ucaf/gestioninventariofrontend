@@ -96,7 +96,7 @@ const Routes = () => {
                 <Route exact path="/Usuarios">
                     <Usuarios />
                 </Route>
-                <Route path="/Usuarios/:usuarioId">
+                <Route path="/Usuarios/:userName">
                     <UsuarioDetail />
                 </Route>
             </Switch>
