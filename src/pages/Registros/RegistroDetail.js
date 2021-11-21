@@ -13,6 +13,7 @@ import Modal from '../../components/Modal/ModalComponent';
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
 import { getAllEquiposApiCall } from "../../api/Equipos";
 import { Box } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const RegistroDetail = (props) => {
     const { registroId } = useParams();
@@ -124,6 +125,14 @@ export const RegistroDetail = (props) => {
                 <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
                 <h1 style={{textAlign: "center"}}>Detalles de los Registros</h1>
                 <FormPageContainer>
+
+                    <FormGroup>
+                        <Button variant="contained" aria-label="delete" size="large" color="error">
+                            Eliminar
+                            <DeleteIcon fontSize="inherit" />
+                        </Button>
+                    </FormGroup>
+
                     <FormGroup>
                         <FormControl sx={{ minWidth: "100%" }}>
                             <small> Descripción </small>
