@@ -1,18 +1,24 @@
 import { Button } from '@mui/material';
-import { useState } from 'react';
 import Modal from 'react-modal';
-import FormButtonsContainer from '../Containers/TablePageButtonsContainer';
+import ModalButtonsContainer from '../Containers/ModalButtonsContainer';
 
 const ModalComponent = ({modalProps, onCloseModal}) => {
+    const customStyles = {
+        content: {
+            background: "black",
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+        },
+    };
     return (
         <Modal
             isOpen={modalProps.show}
             onRequestClose={modalProps.onCloseModal}
-            style={{
-                content: {
-                    background: "black"
-                }
-            }}
+            style={customStyles}
         >
             <div style={{width: "100%", display:"flex", justifyContent: "flex-end"}}>
                 <span style={{cursor: "pointer"}} onClick={()=>{onCloseModal(); modalProps.afterCloseModal();}}>X</span>
@@ -21,14 +27,21 @@ const ModalComponent = ({modalProps, onCloseModal}) => {
             <p>{modalProps.message}</p>
             {
                 modalProps.type === "delete" ? 
-                <FormButtonsContainer>
+                <ModalButtonsContainer>
                     <Button variant="outlined" size="large" onClick={()=>{onCloseModal(); modalProps.afterCloseModal();}}>Cancelar</Button>
                     <Button variant="contained" size="large" onClick={()=>{modalProps.onDelete(); modalProps.afterCloseModal();}} color="error">Eliminar</Button>
-                </FormButtonsContainer>
+                </ModalButtonsContainer>
                 :
-                <FormButtonsContainer>
+                <div style={
+                    {
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        margin: "0 0 20px 0",
+                    }
+                }>
                     <Button variant="contained" size="large" onClick={()=>{onCloseModal(); modalProps.afterCloseModal();}}>Aceptar</Button>
-                </FormButtonsContainer>
+                </div>
             }
         </Modal>
     )
