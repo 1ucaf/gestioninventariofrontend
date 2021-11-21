@@ -63,6 +63,7 @@ export const ProveedorDetail = () => {
     }
    
     const onSave = () => {
+        console.log(proveedor);
         saveProveedorApiCall(proveedor)
         .then( response => {
             setModalProps({

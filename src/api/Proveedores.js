@@ -23,8 +23,9 @@ export const getProveedorApiCall = async (proveedorId) => {
 export const saveProveedorApiCall = async proveedor => {
     try {
         const body = {
-            ProveedorId: proveedor.proveedorId,
+            ProveedorId: proveedor.ProveedorId,
             RazonSocial: proveedor.RazonSocial,
+            CUIT: proveedor.CUIT,
         }
         const response = await axios.put(rootApiRoute + "/Proveedors/?id=" + proveedor.ProveedorId , body);
         return response.data;
