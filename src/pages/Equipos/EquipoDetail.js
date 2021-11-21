@@ -188,12 +188,12 @@ export const EquipoDetail = () => {
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Proveedor</InputLabel>
                                     <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    defaultValue={equipo.ProveedorId}
-                                    value={equipo.ProveedorId}
-                                    label="Proveedor"
-                                    onChange={handleChangeProveedor}
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        defaultValue={equipo.ProveedorId}
+                                        value={equipo.ProveedorId}
+                                        label="Proveedor"
+                                        onChange={handleChangeProveedor}
                                     >
                                         {
                                             proveedores.map(proveedor => {
