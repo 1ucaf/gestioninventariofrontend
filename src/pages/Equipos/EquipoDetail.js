@@ -168,7 +168,7 @@ export const EquipoDetail = () => {
                         <>
                             <Box sx={{ minWidth: "40%" }}>
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">{equipo.OficinaNombre}</InputLabel>
+                                    <InputLabel id="demo-simple-select-label">Oficina</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
