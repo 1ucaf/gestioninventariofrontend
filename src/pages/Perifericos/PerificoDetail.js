@@ -5,12 +5,15 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { getPerifericoApiCall, savePerifericoApiCall } from "../../api/Perifericos";
+import { deletePerifericoApiCall, getPerifericoApiCall, savePerifericoApiCall } from "../../api/Perifericos";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import { getAllEquiposApiCall } from "../../api/Equipos";
 import { Box } from "@mui/system";
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
+//import { Box } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 export const PerificoDetail = () => {
     const { perifericoId } = useParams();
@@ -104,12 +107,46 @@ export const PerificoDetail = () => {
         history.push("/Perifericos");
     }
 
+    const onDelete = () => {
+        deletePerifericoApiCall(periferico.PerifericoId)
+        .then(data => {
+            console.log(data);
+            setModalProps({
+                ...modalProps,
+                title: "¡Eliminado!",
+                show: true,
+                type: "",
+                message: "Periferico Eliminado con éxito!!!",
+                afterCloseModal: goBack,
+            })
+        })
+    }
+
+    const onConfirmDelete = () => {
+        setModalProps({
+            ...modalProps,
+            title: "Borrar",
+            show: true,
+            type: "delete",
+            message: "Está seguro que desea eliminar el periferico?",
+            onDelete: onDelete,
+        })
+    }
+
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
                 <h1 style={{textAlign: "center"}}>Detalles de Perifericos</h1>
                 <FormPageContainer>
+
+                    <FormGroup>
+                        <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
+                            Eliminar
+                            <DeleteIcon fontSize="inherit" />
+                        </Button>
+                    </FormGroup>
+
                     <FormGroup>
                         <FormControl sx={{ minWidth: "100%" }}>
                             <small> Descripción </small>

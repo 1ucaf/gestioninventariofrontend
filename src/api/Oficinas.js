@@ -32,3 +32,12 @@ export const saveOficinaApiCall = async oficina => {
         throw error;
     }
 }
+
+export const deleteOficinaApiCall = async oficinaId => {
+    try {
+        const response = await axios.delete(rootApiRoute + "/Oficinas/?id=" + oficinaId);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

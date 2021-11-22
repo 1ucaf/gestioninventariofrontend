@@ -3,12 +3,13 @@ import FormGroup from "../../components/Containers/FormGroup";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { getProveedorApiCall, saveProveedorApiCall} from "../../api/Proveedores";
+import { createProveedorApiCall, deleteProveedorApiCall, getProveedorApiCall, saveProveedorApiCall} from "../../api/Proveedores";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
+import DeleteIcon from '@mui/icons-material/Delete';
 
-export const ProveedorDetail = () => {
+export const ProveedorDetail = (props) => {
     const { proveedorId } = useParams();
 
     const history = useHistory();
@@ -63,6 +64,21 @@ export const ProveedorDetail = () => {
     }
    
     const onSave = () => {
+        if(props.isNew) {
+            createProveedorApiCall(proveedor)
+            .then( response => {
+                setModalProps({
+                    ...modalProps,
+                    title: "Guardado!",
+                    show: true,
+                    type: "",
+                    message: "Proveedor guardado con éxito!",
+                    afterCloseModal: goBack
+                })
+            })
+            .catch(onError);
+        }
+        else {
         console.log(proveedor);
         saveProveedorApiCall(proveedor)
         .then( response => {
@@ -76,17 +92,53 @@ export const ProveedorDetail = () => {
             })
         })
         .catch(onError);
+        }
     }
 
     const goBack = () => {        
         history.push("/Proveedores");
     }
 
+    const onDelete = () => {
+        deleteProveedorApiCall(proveedor.ProveedorId)
+        .then(data => {
+            console.log(data);
+            setModalProps({
+                ...modalProps,
+                title: "¡Eliminado!",
+                show: true,
+                type: "",
+                message: "Proveedor Eliminado con éxito!!!",
+                afterCloseModal: goBack,
+            })
+        })
+    }
+
+    const onConfirmDelete = () => {
+        setModalProps({
+            ...modalProps,
+            title: "Borrar",
+            show: true,
+            type: "delete",
+            message: "Está seguro que desea eliminar el proveedor?",
+            onDelete: onDelete,
+        })
+    }
+
+
     return (
         <>
             <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
             <h1 style={{textAlign: "center"}}>Detalles de los Proveedores</h1>
             <FormPageContainer>
+
+            <FormGroup>
+                        <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
+                            Eliminar
+                            <DeleteIcon fontSize="inherit" />
+                        </Button>
+                    </FormGroup>
+
                 <FormGroup>
                     <FormControl sx={{ minWidth: "100%" }}>
                         <small> Razon Social </small>

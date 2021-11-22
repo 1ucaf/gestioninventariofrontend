@@ -34,3 +34,12 @@ export const saveUsuarioApiCall = async usuario => {
         throw error;
     }
 }
+
+export const deleteUsuarioApiCall = async userName => {
+    try {
+        const response = await axios.delete(rootApiRoute + "/Users/?id=" + userName);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

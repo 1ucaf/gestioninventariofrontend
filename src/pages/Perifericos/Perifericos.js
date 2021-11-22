@@ -20,13 +20,13 @@ const Perifericos = () => {
         {
             selector: row => row.PerifericoId,
             name: 'Id de Periférico',
-            width: "90px",
+            width: "120px",
             right: true,
         },
         {
             selector: row => row.Descripcion,
             name: 'Descripción',
-            width: "500px"
+            width: "450px"
         },
     ]
 

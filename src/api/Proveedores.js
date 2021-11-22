@@ -33,3 +33,26 @@ export const saveProveedorApiCall = async proveedor => {
         throw error;
     }
 }
+
+export const deleteProveedorApiCall = async proveedorId => {
+    try {
+        const response = await axios.delete(rootApiRoute + "/Proveedors/?id=" + proveedorId);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const createProveedorApiCall = async proveedor => {
+    try {
+        const body = {
+            ProveedorId: 0,
+            RazonSocial: proveedor.RazonSocial,
+            CUIT: proveedor.CUIT,
+        }
+        const response = await axios.post(rootApiRoute + "/Proveedors/", body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

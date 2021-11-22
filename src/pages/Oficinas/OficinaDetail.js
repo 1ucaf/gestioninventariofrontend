@@ -3,10 +3,12 @@ import FormGroup from "../../components/Containers/FormGroup";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { getOficinaApiCall, saveOficinaApiCall} from "../../api/Oficinas";
+import { deleteOficinaApiCall, getOficinaApiCall, saveOficinaApiCall} from "../../api/Oficinas";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
+import { Box } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const OficinaDetail = () => {
     const { oficinaId } = useParams();
@@ -78,11 +80,45 @@ export const OficinaDetail = () => {
         history.push("/Oficinas");
     }
 
+    const onDelete = () => {
+        deleteOficinaApiCall(oficina.OficinaId)
+        .then(data => {
+            console.log(data);
+            setModalProps({
+                ...modalProps,
+                title: "¡Eliminada!",
+                show: true,
+                type: "",
+                message: "Oficina Eliminada con éxito!!!",
+                afterCloseModal: goBack,
+            })
+        })
+    }
+
+    const onConfirmDelete = () => {
+        setModalProps({
+            ...modalProps,
+            title: "Borrar",
+            show: true,
+            type: "delete",
+            message: "Está seguro que desea eliminar la oficina?",
+            onDelete: onDelete,
+        })
+    }
+
     return (
         <>
             <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
             <h1 style={{textAlign: "center"}}>Detalles de las Oficina</h1>
             <FormPageContainer>
+
+                <FormGroup> 
+                    <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
+                         Eliminar
+                        <DeleteIcon fontSize="inherit" />
+                    </Button>
+                </FormGroup>
+
                 <FormGroup>
                     <FormControl sx={{ minWidth: "100%" }}>
                         <small> Nombre </small>

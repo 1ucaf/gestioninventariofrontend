@@ -33,3 +33,12 @@ export const savePerifericoApiCall = async periferico => {
         throw error;
     }
 }
+
+export const deletePerifericoApiCall = async perifericoId => {
+    try {
+        const response = await axios.delete(rootApiRoute + "/Perifericoes/?id=" + perifericoId);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

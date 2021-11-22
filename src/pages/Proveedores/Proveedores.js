@@ -5,6 +5,8 @@ import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
 import { useHistory } from "react-router";
+import TablePageButtonsContainer from "../../components/Containers/TablePageButtonsContainer";
+import { Button } from "@mui/material";
 
 const Proveedores = () => {
     const history = useHistory();
@@ -43,8 +45,17 @@ const Proveedores = () => {
         console.log(row);
         history.push("/Proveedores/" + row.ProveedorId);
     }
+
+    const onCreateNew = (e)=>{
+        e.preventDefault();
+        history.push("/Proveedores/create")
+    }
+
     return (
         <TablePageContainer>
+             <TablePageButtonsContainer>
+                <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Registro</Button>
+            </TablePageButtonsContainer>
             <DataTable
                 data={ data }
                 columns={columns}

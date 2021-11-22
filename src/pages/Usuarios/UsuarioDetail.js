@@ -5,12 +5,14 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { getUsuarioApiCall, saveUsuarioApiCall } from "../../api/Usuarios";
+import { deleteUsuarioApiCall, getUsuarioApiCall, saveUsuarioApiCall } from "../../api/Usuarios";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import { getAllEquiposApiCall } from "../../api/Equipos";
 import { Box } from "@mui/system";
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
+//import { Box } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const UsuarioDetail = () => {
     const { userName } = useParams();
@@ -112,12 +114,48 @@ export const UsuarioDetail = () => {
         history.push("/Usuarios");
     }
 
+
+
+  const onDelete = () => {
+        deleteUsuarioApiCall(usuario.UserName)
+        .then(data => {
+            console.log(data);
+            setModalProps({
+                ...modalProps,
+                title: "Eliminado!",
+                show: true,
+                type: "",
+                message: "Usuario Eliminado con éxito!!!",
+                afterCloseModal: goBack,
+            })
+        })
+    }
+
+    const onConfirmDelete = () => {
+        setModalProps({
+            ...modalProps,
+            title: "Borrar",
+            show: true,
+            type: "delete",
+            message: "Está seguro que desea eliminar el usuario?",
+            onDelete: onDelete,
+        })
+    }
+
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
                 <h1 style={{textAlign: "center"}}>Detalles de Usuarios</h1>
                 <FormPageContainer>
+
+                    <FormGroup>
+                        <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
+                            Eliminar
+                            <DeleteIcon fontSize="inherit" />
+                        </Button>
+                    </FormGroup>
+
                     <FormGroup>
                     <FormControl sx={{ minWidth: "100%" }}>
                             <small> Nombre </small>
