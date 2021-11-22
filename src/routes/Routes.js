@@ -16,6 +16,7 @@ import Registros from "../pages/Registros/Registros";
 import RegistroDetail from "../pages/Registros/RegistroDetail";
 import Usuarios from "../pages/Usuarios/Usuarios";
 import { UsuarioDetail } from "../pages/Usuarios/UsuarioDetail";
+import { getToken } from "../utils/Utils";
 
 const routes = [
     {
@@ -45,6 +46,7 @@ const routes = [
 ]
 
 const Routes = () => {
+    console.log(getToken());
     return (
         <Router>
             <NavBar routes={routes}/>

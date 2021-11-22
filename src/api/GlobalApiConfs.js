@@ -1,0 +1,1 @@
+export const rootApiRoute = "https://gestorinventariobackendtfi.azurewebsites.net";

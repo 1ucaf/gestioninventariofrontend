@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const rootApiRoute = "https://gestorinventariobackendtfi.azurewebsites.net"
+import { rootApiRoute } from "./GlobalApiConfs";
 
 export const getAllRegistrosApiCall = async () => {
     try {
