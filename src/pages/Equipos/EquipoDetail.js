@@ -7,13 +7,14 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { createEquipoApiCall, getEquipoApiCall, saveEquipoApiCall } from "../../api/Equipos";
+import { createEquipoApiCall, deleteEquipoApiCall, getEquipoApiCall, saveEquipoApiCall } from "../../api/Equipos";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import { getAllOficinasApiCall } from "../../api/Oficinas";
 import { getAllProveedoresApiCall } from "../../api/Proveedores";
 import { Box } from "@mui/system";
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const EquipoDetail = (props) => {
     const { equipoId } = useParams();
@@ -149,12 +150,46 @@ export const EquipoDetail = (props) => {
         history.push("/Equipos");
     }
 
+    const onDelete = () => {
+        deleteEquipoApiCall(equipo.EquipoId)
+        .then(data => {
+            console.log(data);
+            setModalProps({
+                ...modalProps,
+                title: "Eliminado!",
+                show: true,
+                type: "",
+                message: "Registro Eliminado con éxito!!!",
+                afterCloseModal: goBack,
+            })
+        })
+    }
+
+    const onConfirmDelete = () => {
+        setModalProps({
+            ...modalProps,
+            title: "Borrar",
+            show: true,
+            type: "delete",
+            message: "Está seguro que desea eliminar el equipo?",
+            onDelete: onDelete,
+        })
+    }
+
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
                 <h1 style={{textAlign: "center"}}>Detalles de Equipo</h1>
                 <FormPageContainer>
+
+                    <FormGroup>
+                        <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
+                            Eliminar
+                            <DeleteIcon fontSize="inherit" />
+                        </Button>
+                    </FormGroup>
+
                     <FormGroup>
                         <FormControl sx={{ minWidth: "100%" }}>
                             <small> Descripción </small>
