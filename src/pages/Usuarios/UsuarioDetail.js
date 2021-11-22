@@ -68,11 +68,7 @@ export const UsuarioDetail = () => {
         .catch(e=>{
             onError(e);
         });      
-    },[])
-
-    const onChangeEquipo = event => {
-        setUsuario({...usuario, EquipoId: event.target.value});
-    }
+    },[]);
 
     const onChangeNombre = event => {
         setUsuario({...usuario, Nombre: event.target.value});
@@ -90,7 +86,7 @@ export const UsuarioDetail = () => {
         const equipoSeleccionado = equipos.find(equipo => equipo.EquipoId === event.target.value);
         console.log(equipoSeleccionado.Nombre);
         setUsuario({...usuario,
-            UserName: event.target.value,            
+            EquipoId: event.target.value,            
         });
     }
     
