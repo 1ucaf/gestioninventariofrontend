@@ -45,14 +45,18 @@ export const ProveedorDetail = (props) => {
     }
 
     useEffect(()=>{
-        getProveedorApiCall(proveedorId)
-        .then(data=> {
-            console.log("PROVEEDOR: ", data);
-            setProveedor(data);
-        })
-        .catch(e=>{
-            onError(e);
-        });
+        if(props.isNew) {
+            setProveedor({});
+        } else {
+            getProveedorApiCall(proveedorId)
+            .then(data=> {
+                console.log("PROVEEDOR: ", data);
+                setProveedor(data);
+            })
+            .catch(e=>{
+                onError(e);
+            });
+        }
     },[])
 
     

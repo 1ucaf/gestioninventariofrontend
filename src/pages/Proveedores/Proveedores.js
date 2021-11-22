@@ -43,7 +43,7 @@ const Proveedores = () => {
 
     const onRowClicked = (row, event)=>{
         console.log(row);
-        history.push("/Proveedores/" + row.ProveedorId);
+        history.push("/Proveedores/update/" + row.ProveedorId);
     }
 
     const onCreateNew = (e)=>{
@@ -54,7 +54,7 @@ const Proveedores = () => {
     return (
         <TablePageContainer>
              <TablePageButtonsContainer>
-                <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Registro</Button>
+                <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Proveedor</Button>
             </TablePageButtonsContainer>
             <DataTable
                 data={ data }

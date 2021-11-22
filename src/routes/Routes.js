@@ -55,8 +55,11 @@ const Routes = () => {
                 <Route exact path="/Proveedores">
                     <Proveedores />
                 </Route>
-                <Route exact path="/Proveedores/:proveedorId">
+                <Route exact path="/Proveedores/update/:proveedorId">
                     <ProveedorDetails />
+                </Route>
+                <Route exact path="/Proveedores/create/">
+                    <ProveedorDetails isNew />
                 </Route>
 
                 <Route exact path="/Oficinas">
