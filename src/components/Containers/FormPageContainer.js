@@ -3,9 +3,11 @@ const FormPageContainer = (props) => {
         <div style={
             {
                 height: 400,
+                display: "flex",
                 width: '100%',
                 margin: "auto",
-                marginTop: "30px",
+                // marginTop: "30px",
+                justifyContent: "center",
                 flexWrap: "wrap"
             }
         }>

@@ -6,7 +6,7 @@ const FormGroup = (props) => {
                 width: "100%",
                 display: "flex",
                 justifyContent: "space-between",
-                margin: "40px",
+                margin: "40px 0 40px 0",
                 flexWrap: "wrap",
             }} >
             {props.children}

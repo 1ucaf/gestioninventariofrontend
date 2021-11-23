@@ -30,9 +30,9 @@ const NavBar = (props) => {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    News
+                    Sistema de Gestión Informático
                 </Typography>
-                <Button color="inherit">Login</Button>
+                <Button onClick={()=>navigateTo("/login")} color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
             <Drawer

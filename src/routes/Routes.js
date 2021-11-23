@@ -16,7 +16,8 @@ import Registros from "../pages/Registros/Registros";
 import RegistroDetail from "../pages/Registros/RegistroDetail";
 import Usuarios from "../pages/Usuarios/Usuarios";
 import { UsuarioDetail } from "../pages/Usuarios/UsuarioDetail";
-import { getToken } from "../utils/Utils";
+import { getToken, setToken } from "../utils/Utils";
+import Login from "../pages/Login/Login";
 
 const routes = [
     {
@@ -46,14 +47,17 @@ const routes = [
 ]
 
 const Routes = () => {
-    console.log(getToken());
+    setToken("token");
     return (
         <Router>
             <NavBar routes={routes}/>
             <Switch>
-
-
                 
+                <Route exact path="/login">
+                    <Login />
+                </Route>
+
+
                 <Route exact path="/Proveedores">
                     <Proveedores />
                 </Route>

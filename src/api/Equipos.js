@@ -1,4 +1,5 @@
 import axios from "axios"
+
 import { rootApiRoute } from "./GlobalApiConfs";
 
 export const getAllEquiposApiCall = async () => {

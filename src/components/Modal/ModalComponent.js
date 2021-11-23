@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import Modal from 'react-modal';
 import ModalButtonsContainer from '../Containers/ModalButtonsContainer';
+import SingleButtonContainer from '../Containers/SingleButtonContainer';
 
 const ModalComponent = ({modalProps, onCloseModal}) => {
     const customStyles = {
@@ -32,16 +33,9 @@ const ModalComponent = ({modalProps, onCloseModal}) => {
                     <Button variant="contained" size="large" onClick={()=>{modalProps.onDelete(); modalProps.afterCloseModal();}} color="error">Eliminar</Button>
                 </ModalButtonsContainer>
                 :
-                <div style={
-                    {
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        margin: "0 0 20px 0",
-                    }
-                }>
+                <SingleButtonContainer>
                     <Button variant="contained" size="large" onClick={()=>{onCloseModal(); modalProps.afterCloseModal();}}>Aceptar</Button>
-                </div>
+                </SingleButtonContainer>
             }
         </Modal>
     )
