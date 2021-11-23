@@ -3,14 +3,14 @@ import FormGroup from "../../components/Containers/FormGroup";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { deleteOficinaApiCall, getOficinaApiCall, saveOficinaApiCall} from "../../api/Oficinas";
+import { createOficinaApiCall, deleteOficinaApiCall, getOficinaApiCall, saveOficinaApiCall} from "../../api/Oficinas";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export const OficinaDetail = () => {
+export const OficinaDetail = (props) => {
     const { oficinaId } = useParams();
 
     const history = useHistory();
@@ -38,7 +38,7 @@ export const OficinaDetail = () => {
         console.log(e);
         setModalProps({
             ...modalProps,
-            title: "ERROR!",
+            title: "¡ERROR!",
             show: true,
             type: "error",
             message: e.message,
@@ -48,7 +48,7 @@ export const OficinaDetail = () => {
     useEffect(()=>{
         getOficinaApiCall(oficinaId)
         .then(data=> {
-            console.log("OFCINA: ", data);
+            console.log("OFICINA: ", data);
             setOficina(data);
         })
         .catch(e=>{
@@ -62,18 +62,35 @@ export const OficinaDetail = () => {
     }
    
     const onSave = () => {
+        if(props.isNew) {
+            createOficinaApiCall(oficina)
+            .then( response => {
+                setModalProps({
+                    ...modalProps,
+                    title: "¡Guardado!",
+                    show: true,
+                    type: "",
+                    message: "Oficina '" + oficina.Nombre + "' guardado con éxito",
+                    afterCloseModal: goBack
+                })
+            })
+            .catch(onError);
+        }
+        else {
+        console.log(oficina);
         saveOficinaApiCall(oficina)
         .then( response => {
             setModalProps({
                 ...modalProps,
-                title: "Guardado!",
+                title: "¡Guardado!",
                 show: true,
                 type: "",
-                message: "Oficina guardada con éxito!",
+                message: "Oficina '" + oficina.Nombre + "' modificada con éxito",
                 afterCloseModal: goBack
             })
         })
         .catch(onError);
+        }
     }
 
     const goBack = () => {
@@ -89,7 +106,7 @@ export const OficinaDetail = () => {
                 title: "¡Eliminada!",
                 show: true,
                 type: "",
-                message: "Oficina Eliminada con éxito!!!",
+                message: "Oficina '" + oficina.Nombre + "' eliminada con éxito",
                 afterCloseModal: goBack,
             })
         })
@@ -101,7 +118,7 @@ export const OficinaDetail = () => {
             title: "Borrar",
             show: true,
             type: "delete",
-            message: "Está seguro que desea eliminar la oficina?",
+            message: "¿Está seguro que desea eliminar la oficina '" + oficina.Nombre + "'?",
             onDelete: onDelete,
         })
     }

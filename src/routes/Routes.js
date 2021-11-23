@@ -74,6 +74,9 @@ const Routes = () => {
                 <Route path="/Oficinas/:oficinaId">
                     <OficinaDetail />
                 </Route>
+                <Route exact path="/Oficinas/create/">
+                    <ProveedorDetails isNew />
+                </Route>
 
                 <Route exact path="/Equipos">
                     <Equipos />
@@ -88,8 +91,8 @@ const Routes = () => {
                 <Route exact path="/Perifericos">
                     <Perifericos />
                 </Route>
-                <Route path="/Perifericos/:perifericoId">
-                    <PerifericoDetail />
+                <Route path="/Perifericos/create">
+                    <PerifericoDetail isNew/>
                 </Route>
                 <Route path="/Perifericos/update/:perifericoId">
                     <RegistroDetail />

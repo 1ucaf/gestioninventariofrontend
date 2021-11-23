@@ -46,7 +46,7 @@ export const EquipoDetail = (props) => {
         console.log(e);
         setModalProps({
             ...modalProps,
-            title: "ERROR!",
+            title: "¡ERROR!",
             show: true,
             type: "error",
             message: e.message,
@@ -125,7 +125,7 @@ export const EquipoDetail = (props) => {
                     title: "¡Guardado!",
                     show: true,
                     type: "",
-                    message: "Equipo guardado con éxito",
+                    message: "Equipo '" + equipo.Descripcion + "' modificado con éxito",
                     afterCloseModal: goBack
                 })
             })
@@ -135,10 +135,10 @@ export const EquipoDetail = (props) => {
             .then( response => {
                 setModalProps({
                     ...modalProps,
-                    title: "Guardado!",
+                    title: "¡Guardado!",
                     show: true,
                     type: "",
-                    message: "Equipo guardado con éxito!",
+                    message: "Equipo '" + equipo.Descripcion + "' guardado con éxito",
                     afterCloseModal: goBack
                 })
             })
@@ -156,10 +156,10 @@ export const EquipoDetail = (props) => {
             console.log(data);
             setModalProps({
                 ...modalProps,
-                title: "Eliminado!",
+                title: "¡Eliminado!",
                 show: true,
                 type: "",
-                message: "Registro Eliminado con éxito!!!",
+                message: "Registro '" + equipo.Descripcion + "' eliminado con éxito",
                 afterCloseModal: goBack,
             })
         })
@@ -171,7 +171,7 @@ export const EquipoDetail = (props) => {
             title: "Borrar",
             show: true,
             type: "delete",
-            message: "Está seguro que desea eliminar el equipo?",
+            message: "¿Está seguro que desea eliminar el equipo '" + equipo.Descripcion + "'?",
             onDelete: onDelete,
         })
     }

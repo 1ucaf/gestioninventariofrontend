@@ -76,7 +76,7 @@ export const ProveedorDetail = (props) => {
                     title: "¡Guardado!",
                     show: true,
                     type: "",
-                    message: "Proveedor '" + proveedor.proveedorId + "' guardado con éxito",
+                    message: "Proveedor '" + proveedor.RazonSocial + "' guardado con éxito",
                     afterCloseModal: goBack
                 })
             })
@@ -91,7 +91,7 @@ export const ProveedorDetail = (props) => {
                 title: "¡Guardado!",
                 show: true,
                 type: "",
-                message: "Proveedor '" + proveedor.proveedorId + "' guardado con éxito",
+                message: "Proveedor '" + proveedor.RazonSocial + "' guardado con éxito",
                 afterCloseModal: goBack
             })
         })
@@ -112,7 +112,7 @@ export const ProveedorDetail = (props) => {
                 title: "¡Eliminado!",
                 show: true,
                 type: "",
-                message: "Proveedor '" + proveedor.proveedorId + "' eliminado con éxito",
+                message: "Proveedor '" + proveedor.RazonSocial + "' eliminado con éxito",
                 afterCloseModal: goBack,
             })
         })
@@ -124,7 +124,7 @@ export const ProveedorDetail = (props) => {
             title: "Borrar",
             show: true,
             type: "delete",
-            message: "¿Está seguro que desea eliminar el proveedor '" + proveedor.proveedorId + "' ?",
+            message: "¿Está seguro que desea eliminar el proveedor '" + proveedor.RazonSocial + "' ?",
             onDelete: onDelete,
         })
     }

@@ -43,7 +43,7 @@ export const UsuarioDetail = (props) => {
         console.log(e);
         setModalProps({
             ...modalProps,
-            title: "ERROR!",
+            title: "¡ERROR!",
             show: true,
             type: "error",
             message: e.message,
@@ -60,7 +60,7 @@ export const UsuarioDetail = (props) => {
         .catch(e=>{
             onError(e);
         }); 
-        
+
         if(props.isNew) {
             setUsuario({});
         } else {
@@ -155,7 +155,7 @@ export const UsuarioDetail = (props) => {
             title: "Borrar",
             show: true,
             type: "delete",
-            message: "¿Está seguro que desea eliminar el usuario '" + usuario.UserName + "' ?",
+            message: "¿Está seguro que desea eliminar el usuario '" + usuario.UserName + "'?",
             onDelete: onDelete,
         })
     }

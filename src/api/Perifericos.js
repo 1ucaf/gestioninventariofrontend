@@ -42,3 +42,17 @@ export const deletePerifericoApiCall = async perifericoId => {
         throw error;
     }
 }
+
+export const createPerifericoApiCall = async periferico => {
+    try {
+        const body = {
+            PerifericoId: 0,
+            EquipoId: periferico.EquipoId,
+            Descripcion: periferico.Descripcion
+        }
+        const response = await axios.post(rootApiRoute + "/Perifericoes/", body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

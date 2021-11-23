@@ -41,3 +41,16 @@ export const deleteOficinaApiCall = async oficinaId => {
         throw error;
     }
 }
+
+export const createOficinaApiCall = async oficina => {
+    try {
+        const body = {
+            OficinaId: oficina.OficinaId,
+            Nombre: oficina.Nombre,
+        }
+        const response = await axios.post(rootApiRoute + "/Oficinas/", body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

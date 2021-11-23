@@ -5,6 +5,8 @@ import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
 import { useHistory } from "react-router";
+import TablePageButtonsContainer from "../../components/Containers/TablePageButtonsContainer";
+import { Button } from "@mui/material";
 
 const Perifericos = () => {
     const history = useHistory();
@@ -30,13 +32,21 @@ const Perifericos = () => {
         },
     ]
 
+    const onCreateNew = (e)=>{
+        e.preventDefault();
+        history.push("/Perifericos/create")
+    }
+
     const onRowClicked = (row, event)=>{
         console.log(row);
-        history.push("/Perifericos/"+row.PerifericoId);
+        history.push("/Perifericos/update/" + row.PerifericoId);
     }
 
     return (
         <TablePageContainer>
+            <TablePageButtonsContainer>
+            <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Periferico</Button>
+            </TablePageButtonsContainer>
             <DataTable
                 data={ data }
                 columns={columns}
