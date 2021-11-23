@@ -122,10 +122,10 @@ export const EquipoDetail = (props) => {
             .then( response => {
                 setModalProps({
                     ...modalProps,
-                    title: "Guardado!",
+                    title: "¡Guardado!",
                     show: true,
                     type: "",
-                    message: "Equipo guardado con éxito!",
+                    message: "Equipo guardado con éxito",
                     afterCloseModal: goBack
                 })
             })

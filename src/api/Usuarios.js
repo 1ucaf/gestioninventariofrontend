@@ -43,3 +43,18 @@ export const deleteUsuarioApiCall = async userName => {
         throw error;
     }
 }
+
+export const createUsuarioApiCall = async usuario => {
+    try {
+        const body = {
+            UserName: usuario.UserName,
+            Nombre: usuario.Nombre,
+            Apellido: usuario.Apellido,
+            Email: usuario.Email 
+        }
+        const response = await axios.post(rootApiRoute + "/Users/", body);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

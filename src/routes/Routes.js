@@ -87,7 +87,9 @@ const Routes = () => {
                 <Route path="/Perifericos/:perifericoId">
                     <PerifericoDetail />
                 </Route>
-
+                <Route path="/Perifericos/update/:perifericoId">
+                    <RegistroDetail />
+                </Route>
                 <Route exact path="/Registros">
                     <Registros />
                 </Route>
@@ -101,8 +103,11 @@ const Routes = () => {
                 <Route exact path="/Usuarios">
                     <Usuarios />
                 </Route>
-                <Route path="/Usuarios/:userName">
+                <Route path="/Usuarios/update/:userName">
                     <UsuarioDetail />
+                </Route>
+                <Route path="/Usuarios/create">
+                    <UsuarioDetail isNew/>
                 </Route>
             </Switch>
         </Router>

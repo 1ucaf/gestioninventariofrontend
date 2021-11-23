@@ -73,10 +73,10 @@ export const ProveedorDetail = (props) => {
             .then( response => {
                 setModalProps({
                     ...modalProps,
-                    title: "Guardado!",
+                    title: "¡Guardado!",
                     show: true,
                     type: "",
-                    message: "Proveedor guardado con éxito!",
+                    message: "Proveedor '" + proveedor.proveedorId + "' guardado con éxito",
                     afterCloseModal: goBack
                 })
             })
@@ -88,10 +88,10 @@ export const ProveedorDetail = (props) => {
         .then( response => {
             setModalProps({
                 ...modalProps,
-                title: "Guardado!",
+                title: "¡Guardado!",
                 show: true,
                 type: "",
-                message: "Proveedor guardado con éxito!",
+                message: "Proveedor '" + proveedor.proveedorId + "' guardado con éxito",
                 afterCloseModal: goBack
             })
         })
@@ -112,7 +112,7 @@ export const ProveedorDetail = (props) => {
                 title: "¡Eliminado!",
                 show: true,
                 type: "",
-                message: "Proveedor Eliminado con éxito!!!",
+                message: "Proveedor '" + proveedor.proveedorId + "' eliminado con éxito",
                 afterCloseModal: goBack,
             })
         })
@@ -124,7 +124,7 @@ export const ProveedorDetail = (props) => {
             title: "Borrar",
             show: true,
             type: "delete",
-            message: "Está seguro que desea eliminar el proveedor?",
+            message: "¿Está seguro que desea eliminar el proveedor '" + proveedor.proveedorId + "' ?",
             onDelete: onDelete,
         })
     }
