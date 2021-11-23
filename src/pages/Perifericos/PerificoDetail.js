@@ -5,7 +5,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { deletePerifericoApiCall, getPerifericoApiCall, savePerifericoApiCall } from "../../api/Perifericos";
+import { createPerifericoApiCall, deletePerifericoApiCall, getPerifericoApiCall, savePerifericoApiCall } from "../../api/Perifericos";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import { getAllEquiposApiCall } from "../../api/Equipos";
@@ -15,7 +15,7 @@ import FormButtonsContainer from "../../components/Containers/FormButtonsContain
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-export const PerificoDetail = () => {
+export const PerificoDetail = (props) => {
     const { perifericoId } = useParams();
 
     const history = useHistory();
@@ -44,7 +44,7 @@ export const PerificoDetail = () => {
         console.log(e);
         setModalProps({
             ...modalProps,
-            title: "ERROR!",
+            title: "¡ERROR!",
             show: true,
             type: "error",
             message: e.message,
@@ -89,18 +89,36 @@ export const PerificoDetail = () => {
     
     
     const onSave = () => {
+
+        if(props.isNew) {
+            createPerifericoApiCall(periferico)
+            .then( response => {
+                setModalProps({
+                    ...modalProps,
+                    title: "¡Guardado!",
+                    show: true,
+                    type: "",
+                    message: "Periferico '" + periferico.PerifericoId + "' guardado con éxito",
+                    afterCloseModal: goBack
+                })
+            })
+            .catch(onError);
+        }
+        else {
+        console.log(periferico);
         savePerifericoApiCall(periferico)
         .then( response => {
             setModalProps({
                 ...modalProps,
-                title: "Guardado!",
+                title: "¡Guardado!",
                 show: true,
                 type: "",
-                message: "Periferico guardado con éxito!",
+                message: "Periferico '" + periferico.PerifericoId + "' modificado con éxito",
                 afterCloseModal: goBack
             })
         })
         .catch(onError);
+        }
     }
 
     const goBack = () => {
@@ -116,7 +134,7 @@ export const PerificoDetail = () => {
                 title: "¡Eliminado!",
                 show: true,
                 type: "",
-                message: "Periferico Eliminado con éxito!!!",
+                message: "Periferico '" + periferico.PerifericoId + "' eliminado con éxito",
                 afterCloseModal: goBack,
             })
         })
@@ -128,7 +146,7 @@ export const PerificoDetail = () => {
             title: "Borrar",
             show: true,
             type: "delete",
-            message: "Está seguro que desea eliminar el periferico?",
+            message: "¿Está seguro que desea eliminar el periferico '" + periferico.PerifericoId + "'?",
             onDelete: onDelete,
         })
     }
@@ -148,6 +166,10 @@ export const PerificoDetail = () => {
                     </FormGroup>
 
                     <FormGroup>
+                    <FormControl sx={{ minWidth: "100%" }}>
+                            <small> Id de Periferico </small>
+                            <Input onChange={onChangeDescripcion} id="my-input" aria-describedby="my-helper-text" value={periferico?.PerifericoId} />
+                        </FormControl>
                         <FormControl sx={{ minWidth: "100%" }}>
                             <small> Descripción </small>
                             <Input onChange={onChangeDescripcion} id="my-input" aria-describedby="my-helper-text" value={periferico?.Descripcion} />
