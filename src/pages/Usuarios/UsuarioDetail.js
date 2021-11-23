@@ -5,7 +5,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router"
-import { deleteUsuarioApiCall, getUsuarioApiCall, saveUsuarioApiCall } from "../../api/Usuarios";
+import { createUsuarioApiCall, deleteUsuarioApiCall, getUsuarioApiCall, saveUsuarioApiCall } from "../../api/Usuarios";
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
 import { getAllEquiposApiCall } from "../../api/Equipos";
@@ -14,7 +14,7 @@ import FormButtonsContainer from "../../components/Containers/FormButtonsContain
 //import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export const UsuarioDetail = () => {
+export const UsuarioDetail = (props) => {
     const { userName } = useParams();
 
     const history = useHistory();
@@ -51,14 +51,6 @@ export const UsuarioDetail = () => {
     }
 
     useEffect(()=>{
-        getUsuarioApiCall(userName)
-        .then(data=> {
-            console.log("USUARIOS: ", data);
-            setUsuario(data);
-        })
-        .catch(e=>{
-            onError(e);
-        });
 
         getAllEquiposApiCall()
         .then(data=> {
@@ -67,7 +59,20 @@ export const UsuarioDetail = () => {
         })
         .catch(e=>{
             onError(e);
-        });      
+        }); 
+        
+        if(props.isNew) {
+            setUsuario({});
+        } else {
+            getUsuarioApiCall(userName)
+            .then(data=> {
+                console.log("USUARIO: ", data);
+                setUsuario(data);
+            })
+            .catch(e=>{
+                onError(e);
+            });
+        }     
     },[]);
 
     const onChangeNombre = event => {
@@ -92,6 +97,22 @@ export const UsuarioDetail = () => {
     
     
     const onSave = () => {
+        if(props.isNew) {
+            createUsuarioApiCall(usuario)
+            .then( response => {
+                setModalProps({
+                    ...modalProps,
+                    title: "¡Guardado!",
+                    show: true,
+                    type: "",
+                    message: "Usuario '" + usuario.UserName + "' guardado con éxito",
+                    afterCloseModal: goBack
+                })
+            })
+            .catch(onError);
+        }
+        else {
+        console.log(usuario);
         saveUsuarioApiCall(usuario)
         .then( response => {
             setModalProps({
@@ -99,11 +120,12 @@ export const UsuarioDetail = () => {
                 title: "¡Guardado!",
                 show: true,
                 type: "",
-                message: "Usuario guardado con éxito!",
+                message: "Usuario '" + usuario.UserName + "' guardado con éxito",
                 afterCloseModal: goBack
             })
         })
         .catch(onError);
+        }
     }
 
     const goBack = () => {
@@ -118,10 +140,10 @@ export const UsuarioDetail = () => {
             console.log(data);
             setModalProps({
                 ...modalProps,
-                title: "Eliminado!",
+                title: "¡Eliminado!",
                 show: true,
                 type: "",
-                message: "Usuario Eliminado con éxito!!!",
+                message: "Usuario '" + usuario.UserName + "' eliminado con éxito",
                 afterCloseModal: goBack,
             })
         })
@@ -133,7 +155,7 @@ export const UsuarioDetail = () => {
             title: "Borrar",
             show: true,
             type: "delete",
-            message: "Está seguro que desea eliminar el usuario?",
+            message: "¿Está seguro que desea eliminar el usuario '" + usuario.UserName + "' ?",
             onDelete: onDelete,
         })
     }

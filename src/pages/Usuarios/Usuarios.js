@@ -5,6 +5,8 @@ import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
 import { useHistory } from "react-router";
+import TablePageButtonsContainer from "../../components/Containers/TablePageButtonsContainer";
+import { Button } from "@mui/material";
 
 const Usuarios = () => {
     const history = useHistory();
@@ -47,11 +49,19 @@ const Usuarios = () => {
 
     const onRowClicked = (row, event)=>{
         console.log(row);
-        history.push("/Usuarios/"+row.UserName);
+        history.push("/Usuarios/update/"+row.UserName);
+    }
+
+    const onCreateNew = (e)=>{
+        e.preventDefault();
+        history.push("/Usuarios/create")
     }
 
     return (
         <TablePageContainer>
+            <TablePageButtonsContainer>
+            <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Usuario</Button>
+            </TablePageButtonsContainer>
             <DataTable
                 data={ data }
                 columns={columns}
@@ -61,6 +71,7 @@ const Usuarios = () => {
             />
         </TablePageContainer>
     )
+
 }
 
 export default Usuarios
