@@ -24,7 +24,7 @@ const Oficinas = () => {
 
     const onRowClicked = (row, event)=>{
         console.log(row);
-        history.push("/Oficinas/"+row.OficinaId);
+        history.push("/Oficinas/update/"+row.OficinaId);
     }
 
     const columns = [

@@ -52,14 +52,18 @@ export const PerificoDetail = (props) => {
     }
 
     useEffect(()=>{
-        getPerifericoApiCall(perifericoId)
-        .then(data=> {
-            console.log("PERIFERICO: ", data);
-            setPeriferico(data);
-        })
-        .catch(e=>{
-            onError(e);
-        });
+        if(props.isNew) {
+            setPeriferico({});
+        } else {
+            getPerifericoApiCall(perifericoId)
+            .then(data=> {
+                console.log("PERIFERICO: ", data);
+                setPeriferico(data);
+            })
+            .catch(e=>{
+                onError(e);
+            });
+        }
 
         getAllEquiposApiCall()
         .then(data=> {
@@ -71,19 +75,14 @@ export const PerificoDetail = (props) => {
         });      
     },[])
 
-    const onChangeEquipo = event => {
-        setPeriferico({...periferico, EquipoId: event.target.value});
-    }
 
     const onChangeDescripcion = event => {
         setPeriferico({...periferico, Descripcion: event.target.value});
     }    
 
     const handleChangeEquipo = event => {
-        const equipoSeleccionado = equipos.find(equipo => equipo.EquipoId === event.target.value);
-        console.log(equipoSeleccionado.Nombre);
         setPeriferico({...periferico,
-            PerifericoId: event.target.value,            
+            EquipoId: event.target.value,
         });
     }
     
@@ -93,31 +92,32 @@ export const PerificoDetail = (props) => {
         if(props.isNew) {
             createPerifericoApiCall(periferico)
             .then( response => {
+                console.log(response);
                 setModalProps({
                     ...modalProps,
                     title: "¡Guardado!",
                     show: true,
                     type: "",
-                    message: "Periferico '" + periferico.PerifericoId + "' guardado con éxito",
+                    message: "Periferico '" + response.PerifericoId + "' guardado con éxito",
                     afterCloseModal: goBack
                 })
             })
             .catch(onError);
         }
         else {
-        console.log(periferico);
-        savePerifericoApiCall(periferico)
-        .then( response => {
-            setModalProps({
-                ...modalProps,
-                title: "¡Guardado!",
-                show: true,
-                type: "",
-                message: "Periferico '" + periferico.PerifericoId + "' modificado con éxito",
-                afterCloseModal: goBack
+            console.log(periferico);
+            savePerifericoApiCall(periferico)
+            .then( response => {
+                setModalProps({
+                    ...modalProps,
+                    title: "¡Guardado!",
+                    show: true,
+                    type: "",
+                    message: "Periferico '" + periferico.PerifericoId + "' modificado con éxito",
+                    afterCloseModal: goBack
+                })
             })
-        })
-        .catch(onError);
+            .catch(onError);
         }
     }
 
@@ -166,10 +166,6 @@ export const PerificoDetail = (props) => {
                     </FormGroup>
 
                     <FormGroup>
-                    <FormControl sx={{ minWidth: "100%" }}>
-                            <small> Id de Periferico </small>
-                            <Input onChange={onChangeDescripcion} id="my-input" aria-describedby="my-helper-text" value={periferico?.PerifericoId} />
-                        </FormControl>
                         <FormControl sx={{ minWidth: "100%" }}>
                             <small> Descripción </small>
                             <Input onChange={onChangeDescripcion} id="my-input" aria-describedby="my-helper-text" value={periferico?.Descripcion} />

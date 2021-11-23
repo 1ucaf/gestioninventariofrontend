@@ -46,6 +46,9 @@ export const OficinaDetail = (props) => {
     }
 
     useEffect(()=>{
+        if(props.isNew) {
+            setOficina({});
+        } else 
         getOficinaApiCall(oficinaId)
         .then(data=> {
             console.log("OFICINA: ", data);
