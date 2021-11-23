@@ -81,13 +81,13 @@ const Login = () => {
                 <FormGroup>
                     <FormControl sx={{ minWidth: "100%" }}>
                         <small> Usuario </small>
-                        <Input onChange={onChangeUserName} id="my-input" aria-describedby="my-helper-text" value={userName} />
+                        <Input onChange={onChangeUserName} id="username-txt" aria-describedby="my-helper-text" value={userName} />
                     </FormControl>
                 </FormGroup>
                 <FormGroup>
                     <FormControl sx={{ minWidth: "100%" }}>
                         <small> Contraseña </small>
-                        <Input onChange={onChangePassword} id="my-input" aria-describedby="my-helper-text" value={password} />
+                        <Input onChange={onChangePassword} type="password" id="my-input" aria-describedby="my-helper-text" value={password} />
                     </FormControl>
                 </FormGroup>
                 <SingleButtonContainer>
