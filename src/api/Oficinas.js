@@ -2,6 +2,9 @@ import axios from "axios"
 
 import { rootApiRoute } from "./GlobalApiConfs";
 
+import { getToken } from "../utils/Utils";
+axios.defaults.headers.common['Authorization'] = getToken();
+
 export const getAllOficinasApiCall = async () => {
     try {
         const response = await axios.get(rootApiRoute + "/Oficinas");

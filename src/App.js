@@ -2,6 +2,7 @@ import './App.css';
 import Routes from './routes/Routes';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   const darkTheme = createTheme({
@@ -13,7 +14,9 @@ function App() {
     <div className="App">
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Routes/>
+        <RecoilRoot>
+          <Routes/>
+        </RecoilRoot>
       </ThemeProvider>
     </div>
   );

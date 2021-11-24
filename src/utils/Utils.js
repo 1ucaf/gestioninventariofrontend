@@ -7,7 +7,7 @@ export const setToken = (token) => {
     setCookie({
         cname: "token",
         cvalue: token,
-        exhours: 2,
+        exhours: 4,
     })
 }
 

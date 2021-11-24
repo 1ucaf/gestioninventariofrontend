@@ -1,15 +1,17 @@
 import { Button, FormControl, Input } from "@mui/material";
 import FormGroup from "../../components/Containers/FormGroup";
 import { useState } from "react";
-import { useHistory, useParams } from "react-router"
+import { useHistory } from "react-router"
 import FormPageContainer from "../../components/Containers/FormPageContainer";
 import Modal from '../../components/Modal/ModalComponent';
-import FormButtonsContainer from "../../components/Containers/FormButtonsContainer";
 import SingleButtonContainer from "../../components/Containers/SingleButtonContainer";
 import { loginApiCall } from "../../api/Session";
 import { setToken } from "../../utils/Utils";
+import { useRecoilState } from 'recoil';
+import { token } from '../../recoil/atom/atoms';
 
 const Login = () => {
+    const [, setTokenAtom] = useRecoilState(token);
     const history = useHistory();
 
     const [userName, setUserName] = useState("");
@@ -68,6 +70,7 @@ const Login = () => {
         .then(token => {
             console.log(token);
             setToken(token);
+            setTokenAtom(token);
         })
         .catch(onError);
     }

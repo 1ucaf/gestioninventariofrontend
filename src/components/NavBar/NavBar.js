@@ -19,41 +19,50 @@ const NavBar = (props) => {
         <Box>
             <AppBar position="static">
                 <Toolbar>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                    onClick={()=>setOpened(true)}
-                >
-                    <MenuIcon />
-                </IconButton>
+                {   props.thereIsAnyToken ? 
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                        onClick={()=>setOpened(true)}
+                    >
+                        <MenuIcon />
+                    </IconButton> : <></>
+                }
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Sistema de Gestión Informático
                 </Typography>
-                <Button onClick={()=>navigateTo("/login")} color="inherit">Login</Button>
+                {
+                    !props.thereIsAnyToken ? 
+                    <Button onClick={()=>navigateTo("/login")} color="inherit">Iniciar Sesión</Button>
+                    :
+                    <Button onClick={props.closeSession} color="inherit">Cerrar Sesión</Button>
+                }
                 </Toolbar>
             </AppBar>
-            <Drawer
-                anchor={"left"}
-                open={opened}
-                onClose={()=>setOpened(false)}
-            >
-                <List>
-                    <Divider />
-                    {props.routes.map((route, index) => {
-                        return (
-                            <ListItem button key={index} onClick={()=>{navigateTo(route.path)}}>
-                                <ListItemIcon>
-                                </ListItemIcon>
-                                <ListItemText primary={route.text} />
-                            </ListItem>
-                        )
-                    })
-                    }
-                </List>
-            </Drawer>
+            {   props.thereIsAnyToken ? 
+                <Drawer
+                    anchor={"left"}
+                    open={opened}
+                    onClose={()=>setOpened(false)}
+                >
+                    <List>
+                        <Divider />
+                        {props.routes.map((route, index) => {
+                            return (
+                                <ListItem button key={index} onClick={()=>{navigateTo(route.path)}}>
+                                    <ListItemIcon>
+                                    </ListItemIcon>
+                                    <ListItemText primary={route.text} />
+                                </ListItem>
+                            )
+                        })
+                        }
+                    </List>
+                </Drawer> : <></>
+            }
         </Box>
     )
 }

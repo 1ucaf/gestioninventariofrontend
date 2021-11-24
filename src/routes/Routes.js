@@ -18,6 +18,11 @@ import Usuarios from "../pages/Usuarios/Usuarios";
 import { UsuarioDetail } from "../pages/Usuarios/UsuarioDetail";
 import { getToken, setToken } from "../utils/Utils";
 import Login from "../pages/Login/Login";
+import PrivateRoute from "./PrivateRoute";
+import { token } from "../recoil/atom/atoms";
+import {  useRecoilState } from 'recoil';
+import { useEffect } from "react";
+
 
 const routes = [
     {
@@ -47,10 +52,17 @@ const routes = [
 ]
 
 const Routes = () => {
-    setToken("token");
+    const [tokenAtom, setTokenAtom] = useRecoilState(token);
+    useEffect(()=>{
+        setTokenAtom( getToken() );
+    }, [])
+    const closeSession = ()=>{
+        setTokenAtom("");
+        setToken("");
+    }
     return (
         <Router>
-            <NavBar routes={routes}/>
+            <NavBar closeSession={closeSession} thereIsAnyToken={tokenAtom} routes={routes}/>
             <Switch>
                 
                 <Route exact path="/login">
@@ -58,65 +70,65 @@ const Routes = () => {
                 </Route>
 
 
-                <Route exact path="/Proveedores">
+                <PrivateRoute exact path="/Proveedores">
                     <Proveedores />
-                </Route>
-                <Route exact path="/Proveedores/update/:proveedorId">
+                </PrivateRoute>
+                <PrivateRoute exact path="/Proveedores/update/:proveedorId">
                     <ProveedorDetails />
-                </Route>
-                <Route exact path="/Proveedores/create/">
+                </PrivateRoute>
+                <PrivateRoute exact path="/Proveedores/create/">
                     <ProveedorDetails isNew />
-                </Route>
+                </PrivateRoute>
 
-                <Route exact path="/Oficinas">
+                <PrivateRoute exact path="/Oficinas">
                     <Oficinas />
-                </Route>
-                <Route path="/Oficinas/update/:oficinaId">
+                </PrivateRoute>
+                <PrivateRoute path="/Oficinas/update/:oficinaId">
                     <OficinaDetail />
-                </Route>
-                <Route exact path="/Oficinas/create/">
+                </PrivateRoute>
+                <PrivateRoute exact path="/Oficinas/create/">
                     <OficinaDetail isNew />
-                </Route>
+                </PrivateRoute>
 
-                <Route exact path="/Equipos">
+                <PrivateRoute exact path="/Equipos">
                     <Equipos />
-                </Route>
-                <Route path="/Equipos/update/:equipoId">
+                </PrivateRoute>
+                <PrivateRoute path="/Equipos/update/:equipoId">
                     <EquipoDetail />
-                </Route>
-                <Route path="/Equipos/create">
+                </PrivateRoute>
+                <PrivateRoute path="/Equipos/create">
                     <EquipoDetail isNew/>
-                </Route>
+                </PrivateRoute>
 
-                <Route exact path="/Perifericos">
+                <PrivateRoute exact path="/Perifericos">
                     <Perifericos />
-                </Route>
-                <Route path="/Perifericos/update/:perifericoId">
+                </PrivateRoute>
+                <PrivateRoute path="/Perifericos/update/:perifericoId">
                     <PerifericoDetail />
-                </Route>
-                <Route path="/Perifericos/create">
+                </PrivateRoute>
+                <PrivateRoute path="/Perifericos/create">
                     <PerifericoDetail isNew/>
-                </Route>
+                </PrivateRoute>
                 
-                <Route exact path="/Registros">
+                <PrivateRoute exact path="/Registros">
                     <Registros />
-                </Route>
-                <Route path="/Registros/update/:registroId">
+                </PrivateRoute>
+                <PrivateRoute path="/Registros/update/:registroId">
                     <RegistroDetail />
-                </Route>
-                <Route path="/Registros/create">
+                </PrivateRoute>
+                <PrivateRoute path="/Registros/create">
                     <RegistroDetail isNew/>
-                </Route>
+                </PrivateRoute>
 
-                <Route exact path="/Usuarios">
+                <PrivateRoute exact path="/Usuarios">
                     <Usuarios />
-                </Route>
-                <Route path="/Usuarios/update/:userName">
+                </PrivateRoute>
+                <PrivateRoute path="/Usuarios/update/:userName">
                     <UsuarioDetail />
-                </Route>
-                <Route path="/Usuarios/create">
+                </PrivateRoute>
+                <PrivateRoute path="/Usuarios/create">
                     <UsuarioDetail isNew/>
-                </Route>
+                </PrivateRoute>
             </Switch>
         </Router>
     )
