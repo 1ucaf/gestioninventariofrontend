@@ -34,6 +34,9 @@ const NavBar = (props) => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Sistema de Gestión Informático
                 </Typography>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    Usuario: {props.userName}
+                </Typography>
                 {
                     !props.thereIsAnyToken ? 
                     <Button onClick={()=>navigateTo("/login")} color="inherit">Iniciar Sesión</Button>

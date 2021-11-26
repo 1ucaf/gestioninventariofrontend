@@ -19,7 +19,7 @@ import { UsuarioDetail } from "../pages/Usuarios/UsuarioDetail";
 import { getToken, setToken } from "../utils/Utils";
 import Login from "../pages/Login/Login";
 import PrivateRoute from "./PrivateRoute";
-import { token } from "../recoil/atom/atoms";
+import { token, userName } from "../recoil/atom/atoms";
 import {  useRecoilState } from 'recoil';
 import { useEffect } from "react";
 
@@ -52,6 +52,7 @@ const routes = [
 ]
 
 const Routes = () => {
+    const userNameState = useRecoilState(userName);
     const [tokenAtom, setTokenAtom] = useRecoilState(token);
     useEffect(()=>{
         setTokenAtom( getToken() );
@@ -62,7 +63,7 @@ const Routes = () => {
     }
     return (
         <Router>
-            <NavBar closeSession={closeSession} thereIsAnyToken={tokenAtom} routes={routes}/>
+            <NavBar userName={userNameState} closeSession={closeSession} thereIsAnyToken={tokenAtom} routes={routes}/>
             <Switch>
                 
                 <Route exact path="/login">

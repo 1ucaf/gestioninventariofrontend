@@ -3,16 +3,23 @@ import {
     Route,
     Redirect
 } from 'react-router-dom';
-import { renewTokenApiCall } from '../api/Session';
+import { useRecoilState } from 'recoil';
+import { getUserNameApiCall, renewTokenApiCall } from '../api/Session';
+import { userName } from '../recoil/atom/atoms';
 import { getToken, setToken } from '../utils/Utils';
   
 function PrivateRoute({ children, ...rest }) {
+    const [, setUserName] = useRecoilState(userName);
 
     const [isAuthenticated, setIsAuthenticated] = useState();
 
     useEffect(()=>{
         setIsAuthenticated(undefined);
         const token = getToken();
+        getUserNameApiCall(token)
+        .then(response => {
+            setUserName(response);
+        })
         renewTokenApiCall(token)
         .then(response => {
             setToken(response);

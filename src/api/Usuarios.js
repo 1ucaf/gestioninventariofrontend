@@ -28,10 +28,11 @@ export const getUsuarioApiCall = async (userId) => {
 export const saveUsuarioApiCall = async usuario => {
     try {
         const body = {
-            UserName:usuario.UserName,
+            UserName: usuario.UserName,
             Nombre: usuario.Nombre,
             Apellido: usuario.Apellido,
-            Email: usuario.Email            
+            Email: usuario.Email,
+            EquipoId: usuario.EquipoId,
         }
         const response = await axios.put(rootApiRoute + "/Users/?id=" + usuario.UserName, body);
         return response.data;
@@ -55,9 +56,11 @@ export const createUsuarioApiCall = async usuario => {
             UserName: usuario.UserName,
             Nombre: usuario.Nombre,
             Apellido: usuario.Apellido,
-            Email: usuario.Email 
+            Password: usuario.Password,
+            Email: usuario.Email,
+            EquipoId: usuario.EquipoId,
         }
-        const response = await axios.post(rootApiRoute + "/Users/", body);
+        const response = await axios.post(rootApiRoute + "/Users", body);
         return response.data;
     } catch (error) {
         throw error;

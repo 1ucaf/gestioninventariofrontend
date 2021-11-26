@@ -37,6 +37,11 @@ const Oficinas = () => {
             name: 'Nombre de Oficina',
             width: "150px"
         },
+        {
+            selector: row => row.PromAntEquipos,
+            name: 'Promedio de Antigüead en días ',
+            width: "400px"
+        },
     ]
 
     const onCreateNew = (e)=>{
@@ -56,6 +61,9 @@ const Oficinas = () => {
                 onRowClicked={onRowClicked}
                 pointerOnHover
             />
+            {
+                (new Date()).toLocaleString()
+            }
         </TablePageContainer>
     )
 }

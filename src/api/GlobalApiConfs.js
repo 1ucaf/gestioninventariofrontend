@@ -1,2 +1,2 @@
-export const rootApiRoute = "https://gestorinventariobackendtfi.azurewebsites.net";
-// export const rootApiRoute = "http://localhost:54156";
+// export const rootApiRoute = "https://gestorinventariobackendtfi.azurewebsites.net";
+export const rootApiRoute = "http://localhost:54156";

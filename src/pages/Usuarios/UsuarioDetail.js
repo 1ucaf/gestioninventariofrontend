@@ -21,6 +21,7 @@ export const UsuarioDetail = (props) => {
 
     const [usuario, setUsuario] = useState();
     const [equipos, setEquipos] = useState();
+    const [passwordConfirm, setPasswordConfirm] = useState("");
     
     const [modalProps, setModalProps] = useState({
         title: "",
@@ -75,6 +76,10 @@ export const UsuarioDetail = (props) => {
         }     
     },[]);
 
+    const onChangeUserName = e => {
+        setUsuario({...usuario, UserName: e.target.value});
+    }
+
     const onChangeNombre = event => {
         setUsuario({...usuario, Nombre: event.target.value});
     }
@@ -87,9 +92,17 @@ export const UsuarioDetail = (props) => {
         setUsuario({...usuario, Email: event.target.value});
     }
 
+    const onChangePass = e => {
+        setUsuario({...usuario, Password: e.target.value});
+    }
+
+    const onChangeConfirmPass = e => {
+        setPasswordConfirm(e.target.value);
+    }
+
     const handleChangeEquipo = event => {
         const equipoSeleccionado = equipos.find(equipo => equipo.EquipoId === event.target.value);
-        console.log(equipoSeleccionado.Nombre);
+        console.log(event.target.value);
         setUsuario({...usuario,
             EquipoId: event.target.value,            
         });
@@ -98,7 +111,33 @@ export const UsuarioDetail = (props) => {
     
     const onSave = () => {
         if(props.isNew) {
-            createUsuarioApiCall(usuario)
+            console.log(usuario);
+            if(usuario.Password === passwordConfirm) {
+                createUsuarioApiCall(usuario)
+                .then( response => {
+                    setModalProps({
+                        ...modalProps,
+                        title: "¡Guardado!",
+                        show: true,
+                        type: "",
+                        message: "Usuario '" + usuario.UserName + "' guardado con éxito",
+                        afterCloseModal: goBack
+                    })
+                })
+                .catch(onError);
+            } else {  
+                setModalProps({
+                    ...modalProps,
+                    title: "¡ERROR!",
+                    show: true,
+                    type: "error",
+                    message: "La contraseña no coincide",
+                })
+            }
+        }
+        else {
+            console.log(usuario);
+            saveUsuarioApiCall(usuario)
             .then( response => {
                 setModalProps({
                     ...modalProps,
@@ -110,21 +149,6 @@ export const UsuarioDetail = (props) => {
                 })
             })
             .catch(onError);
-        }
-        else {
-        console.log(usuario);
-        saveUsuarioApiCall(usuario)
-        .then( response => {
-            setModalProps({
-                ...modalProps,
-                title: "¡Guardado!",
-                show: true,
-                type: "",
-                message: "Usuario '" + usuario.UserName + "' guardado con éxito",
-                afterCloseModal: goBack
-            })
-        })
-        .catch(onError);
         }
     }
 
@@ -175,7 +199,7 @@ export const UsuarioDetail = (props) => {
                     </FormGroup>
 
                     <FormGroup>
-                    <FormControl sx={{ minWidth: "100%" }}>
+                        <FormControl sx={{ minWidth: "100%" }}>
                             <small> Nombre </small>
                             <Input onChange={onChangeNombre} id="my-input" aria-describedby="my-helper-text" value={usuario?.Nombre} />
                         </FormControl>
@@ -186,7 +210,22 @@ export const UsuarioDetail = (props) => {
                         <FormControl sx={{ minWidth: "100%" }}>
                             <small> Email </small>
                             <Input onChange={onChangeEmail} id="my-input" aria-describedby="my-helper-text" value={usuario?.Email} />
-                        </FormControl>                        
+                        </FormControl>
+                        {
+                            props.isNew ? <>
+                            <FormControl sx={{ minWidth: "100%" }}>
+                                <small> Identificador de Usuario </small>
+                                <Input onChange={onChangeUserName} id="my-input" aria-describedby="my-helper-text" value={usuario?.UserName} />
+                            </FormControl>
+                            <FormControl sx={{ minWidth: "100%" }}>
+                                <small> Contraseña </small>
+                                <Input onChange={onChangePass} id="my-input" type="password" aria-describedby="my-helper-text" value={usuario?.Password} />
+                            </FormControl>
+                            <FormControl sx={{ minWidth: "100%" }}>
+                                <small> Confirmar Contraseña </small>
+                                <Input onChange={onChangeConfirmPass} id="my-input" type="password" aria-describedby="my-helper-text" value={passwordConfirm} />
+                            </FormControl> </> : <></>
+                        }
                     </FormGroup>
                     <FormGroup>
                     {

@@ -27,3 +27,12 @@ export const renewTokenApiCall = async (token) => {
         throw error;
     }
 }
+
+export const getUserNameApiCall = async (token) => {
+    try {
+        const response = await axios.get(rootApiRoute + "/GetUser/?token=" + token);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
