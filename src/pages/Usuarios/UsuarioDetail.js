@@ -192,10 +192,13 @@ export const UsuarioDetail = (props) => {
                 <FormPageContainer>
 
                     <FormGroup>
-                        <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
-                            Eliminar
-                            <DeleteIcon fontSize="inherit" />
-                        </Button>
+                        {
+                            props.isNew ? <></> :
+                            <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
+                                Eliminar
+                                <DeleteIcon fontSize="inherit" />
+                            </Button>
+                        }
                     </FormGroup>
 
                     <FormGroup>
