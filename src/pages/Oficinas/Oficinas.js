@@ -51,6 +51,7 @@ const Oficinas = () => {
 
     return (
         <TablePageContainer>
+            <h1 style={{textAlign: "center"}}>Oficinas</h1>
             <TablePageButtonsContainer>
             <Button variant="contained" size="large" onClick={onCreateNew}>Nueva Oficina</Button>
             </TablePageButtonsContainer>
@@ -61,9 +62,6 @@ const Oficinas = () => {
                 onRowClicked={onRowClicked}
                 pointerOnHover
             />
-            {
-                (new Date()).toLocaleString()
-            }
         </TablePageContainer>
     )
 }

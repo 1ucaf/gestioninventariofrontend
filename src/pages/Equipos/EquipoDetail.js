@@ -63,9 +63,7 @@ export const EquipoDetail = (props) => {
                     Adquisicion: new Date(data.Adquisicion)
                 });
             })
-            .catch(e=>{
-                onError(e);
-            });
+            .catch(onError);
         } else {
             setEquipo({});
         }
@@ -176,6 +174,10 @@ export const EquipoDetail = (props) => {
         })
     }
 
+    const onGestionarPerifericos = () => {
+        history.push("/Equipos/Perifericos/" + equipoId);
+    }
+
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -187,6 +189,9 @@ export const EquipoDetail = (props) => {
                         <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
                             Eliminar
                             <DeleteIcon fontSize="inherit" />
+                        </Button>
+                        <Button onClick={onGestionarPerifericos} variant="outlined" size="large">
+                            Gestionar Periféricos
                         </Button>
                     </FormGroup>
 

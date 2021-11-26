@@ -50,6 +50,7 @@ export const deletePerifericoApiCall = async perifericoId => {
 
 export const createPerifericoApiCall = async periferico => {
     try {
+        console.log("EquipoId: ", periferico.EquipoId);
         const body = {
             PerifericoId: 0,
             EquipoId: periferico.EquipoId,

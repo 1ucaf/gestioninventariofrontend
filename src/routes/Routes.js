@@ -20,8 +20,9 @@ import { getToken, setToken } from "../utils/Utils";
 import Login from "../pages/Login/Login";
 import PrivateRoute from "./PrivateRoute";
 import { token, userName } from "../recoil/atom/atoms";
-import {  useRecoilState } from 'recoil';
+import {  useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect } from "react";
+import Footer from "../components/Footer/Footer";
 
 
 const routes = [
@@ -52,7 +53,7 @@ const routes = [
 ]
 
 const Routes = () => {
-    const userNameState = useRecoilState(userName);
+    const userNameState = useRecoilValue(userName);
     const [tokenAtom, setTokenAtom] = useRecoilState(token);
     useEffect(()=>{
         setTokenAtom( getToken() );
@@ -100,6 +101,9 @@ const Routes = () => {
                 <PrivateRoute path="/Equipos/create">
                     <EquipoDetail isNew/>
                 </PrivateRoute>
+                <PrivateRoute path="/Equipos/Perifericos/:equipoIdUrlParam">
+                    <Perifericos isEquipoPerifericos/>
+                </PrivateRoute>
 
                 <PrivateRoute exact path="/Perifericos">
                     <Perifericos />
@@ -107,8 +111,11 @@ const Routes = () => {
                 <PrivateRoute path="/Perifericos/update/:perifericoId">
                     <PerifericoDetail />
                 </PrivateRoute>
-                <PrivateRoute path="/Perifericos/create">
+                <PrivateRoute path="/Perifericos/create/">
                     <PerifericoDetail isNew/>
+                </PrivateRoute>
+                <PrivateRoute path="/Perifericos/associate/:equipoIdUrlParam">
+                    <PerifericoDetail isNew isAssociate/>
                 </PrivateRoute>
                 
                 <PrivateRoute exact path="/Registros">
@@ -131,6 +138,7 @@ const Routes = () => {
                     <UsuarioDetail isNew/>
                 </PrivateRoute>
             </Switch>
+            <Footer/>
         </Router>
     )
 }

@@ -71,6 +71,7 @@ const Login = () => {
             console.log(token);
             setToken(token);
             setTokenAtom(token);
+            history.push("/registros");
         })
         .catch(onError);
     }

@@ -3,12 +3,12 @@ import axios from "axios"
 import { rootApiRoute } from "./GlobalApiConfs";
 
 import { getToken } from "../utils/Utils";
-axios.defaults.headers.common['Authorization'] = getToken();
 
 
 
 export const getAllRegistrosApiCall = async () => {
     try {
+        axios.defaults.headers.common['Authorization'] = getToken();
         const response = await axios.get(rootApiRoute + "/Registroes");
         return response.data;
     } catch(error) {

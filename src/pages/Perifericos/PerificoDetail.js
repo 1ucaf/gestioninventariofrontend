@@ -16,7 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 export const PerificoDetail = (props) => {
-    const { perifericoId } = useParams();
+    const { perifericoId, equipoIdUrlParam } = useParams();
 
     const history = useHistory();
 
@@ -60,9 +60,7 @@ export const PerificoDetail = (props) => {
                 console.log("PERIFERICO: ", data);
                 setPeriferico(data);
             })
-            .catch(e=>{
-                onError(e);
-            });
+            .catch(onError);
         }
 
         getAllEquiposApiCall()
@@ -88,9 +86,10 @@ export const PerificoDetail = (props) => {
     
     
     const onSave = () => {
-
         if(props.isNew) {
-            createPerifericoApiCall(periferico)
+            createPerifericoApiCall({...periferico,
+                EquipoId: equipoIdUrlParam,
+            })
             .then( response => {
                 console.log(response);
                 setModalProps({
@@ -122,7 +121,11 @@ export const PerificoDetail = (props) => {
     }
 
     const goBack = () => {
-        history.push("/Perifericos");
+        if(props.isAssociate) {
+            history.push("/Equipos/Perifericos/"+equipoIdUrlParam);
+        } else {
+            history.push("/Perifericos");
+        }
     }
 
     const onDelete = () => {
@@ -155,15 +158,25 @@ export const PerificoDetail = (props) => {
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
-                <h1 style={{textAlign: "center"}}>Detalles de Perifericos</h1>
+                {
+                    props.isAssociate ? 
+                        <h1 style={{textAlign: "center"}}>Agregar Nuevo Periferico al Equipo</h1>
+                        : props.isNew ?
+                        <h1 style={{textAlign: "center"}}>Nuevo Periférico</h1>
+                        :
+                        <h1 style={{textAlign: "center"}}>Detalles del Periferico</h1>
+                }
                 <FormPageContainer>
 
-                    <FormGroup>
-                        <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
-                            Eliminar
-                            <DeleteIcon fontSize="inherit" />
-                        </Button>
-                    </FormGroup>
+                    {!props.isNew ?
+                        <FormGroup>
+                            <Button onClick={onConfirmDelete} variant="contained" aria-label="delete" size="large" color="error">
+                                Eliminar
+                                <DeleteIcon fontSize="inherit" />
+                            </Button>
+                        </FormGroup>
+                        : <></>
+                    }
 
                     <FormGroup>
                         <FormControl sx={{ minWidth: "100%" }}>
@@ -179,9 +192,10 @@ export const PerificoDetail = (props) => {
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Equipo</InputLabel>
                                     <Select
+                                        disabled={props.isAssociate}
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={periferico.EquipoId}                                        
+                                        value={ props.isAssociate ? equipoIdUrlParam : periferico.EquipoId}
                                         onChange={handleChangeEquipo}
                                     >
                                         {
@@ -191,7 +205,7 @@ export const PerificoDetail = (props) => {
                                         }
                                     </Select>
                                 </FormControl>
-                            </Box>                            
+                            </Box>
                         </> : <> </>
                     }
                     </FormGroup>

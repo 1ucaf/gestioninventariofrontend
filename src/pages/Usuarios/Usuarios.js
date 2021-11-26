@@ -28,22 +28,22 @@ const Usuarios = () => {
         {
             selector: row => row.Email,
             name: 'Email',
-            width: "90px"
+            width: "200px"
         },
         {
             selector: row => row.Equipo,
             name: 'Equipo',
-            width: "90px"
+            width: "130px"
         },
         {
             selector: row => row.Nombre,
             name: 'Nombre',
-            width: "90px"
+            width: "130px"
         },
         {
             selector: row => row.Apellido,
             name: 'Apellido',
-            width: "90px"
+            width: "130px"
         }
     ]
 
@@ -59,6 +59,7 @@ const Usuarios = () => {
 
     return (
         <TablePageContainer>
+            <h1 style={{textAlign: "center"}}>Usuarios</h1>
             <TablePageButtonsContainer>
             <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Usuario</Button>
             </TablePageButtonsContainer>

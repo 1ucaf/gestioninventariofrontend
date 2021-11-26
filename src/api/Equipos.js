@@ -22,6 +22,15 @@ export const getEquipoApiCall = async (equipoId) => {
     }
 }
 
+export const getPerifericosOfEquipoApiCall = async (equipoId) => {
+    try {
+        const response = await axios.get(rootApiRoute + "/Equipos/Perifericos/?id=" + equipoId);
+        return response.data;
+    } catch(error) {
+        throw error;
+    }
+}
+
 export const saveEquipoApiCall = async equipo => {
     try {
         const body = {

@@ -29,17 +29,17 @@ const Registros = () => {
 
     const columns = [
         {
-            selector: row => row.RegistroId,
-            name: 'Id de Registro',
+            selector: row => row.EquipoId,
+            name: 'Id de Equipo',
         },
         {
             selector: row => row.Descripcion,
             name: 'Descripción',
-            width: "150px"
+            width: "400px"
         },
         {
             selector: row => row.Fecha,
-            name: 'Fecha Del Registro',
+            name: 'Fecha de la Incidencia',
             width: "180px"
         },
 
@@ -52,6 +52,7 @@ const Registros = () => {
 
     return (
         <TablePageContainer>
+            <h1 style={{textAlign: "center"}}>Registros</h1>
             <TablePageButtonsContainer>
                 <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Registro</Button>
             </TablePageButtonsContainer>

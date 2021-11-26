@@ -53,6 +53,7 @@ const Proveedores = () => {
 
     return (
         <TablePageContainer>
+            <h1 style={{textAlign: "center"}}>Proveedores</h1>
              <TablePageButtonsContainer>
                 <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Proveedor</Button>
             </TablePageButtonsContainer>

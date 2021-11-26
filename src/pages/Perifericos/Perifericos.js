@@ -4,18 +4,35 @@ import { getAllPerifericosApiCall } from "../../api/Perifericos";
 import DataTable from 'react-data-table-component';
 import TablePageContainer from "../../components/Containers/TablePageContainer";
 import { styles } from "../../styles/Styles";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import TablePageButtonsContainer from "../../components/Containers/TablePageButtonsContainer";
 import { Button } from "@mui/material";
+import { getEquipoApiCall, getPerifericosOfEquipoApiCall } from "../../api/Equipos";
 
-const Perifericos = () => {
+const Perifericos = (props) => {
+    const {equipoIdUrlParam} = useParams();
+
     const history = useHistory();
     const [data, setData] = useState([]);
+    const [equipo, setEquipo] = useState({});
+
     useEffect(()=>{
-        getAllPerifericosApiCall()
-        .then( data => {
-            setData(data);
-        })
+        if(props.isEquipoPerifericos) {
+            getPerifericosOfEquipoApiCall(equipoIdUrlParam)
+            .then(data => {
+                console.log("PERIFÉRICOS: ", data);
+                setData(data);
+            });
+            getEquipoApiCall(equipoIdUrlParam)
+            .then(data => {
+                setEquipo(data);
+            })
+        } else {
+            getAllPerifericosApiCall()
+            .then( data => {
+                setData(data);
+            })
+        }
     }, [])
 
     const columns = [
@@ -34,7 +51,12 @@ const Perifericos = () => {
 
     const onCreateNew = (e)=>{
         e.preventDefault();
-        history.push("/Perifericos/create")
+        if(props.isEquipoPerifericos) {
+            history.push("/Perifericos/associate/" + equipoIdUrlParam);
+        }
+        else {
+            history.push("/Perifericos/create");
+        }
     }
 
     const onRowClicked = (row, event)=>{
@@ -44,6 +66,10 @@ const Perifericos = () => {
 
     return (
         <TablePageContainer>
+            {props.isEquipoPerifericos ?
+                <h1 style={{textAlign: "center"}}>Perifericos del Equipo: {equipo.Descripcion}</h1> :
+                <h1 style={{textAlign: "center"}}>Perifericos</h1>
+            }
             <TablePageButtonsContainer>
             <Button variant="contained" size="large" onClick={onCreateNew}>Nuevo Periferico</Button>
             </TablePageButtonsContainer>
