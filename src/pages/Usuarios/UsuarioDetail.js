@@ -188,7 +188,7 @@ export const UsuarioDetail = (props) => {
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Modal modalProps={modalProps} onCloseModal={onCloseModal}/>
-                <h1 style={{textAlign: "center"}}>Detalles de Usuarios</h1>
+                <h1 style={{textAlign: "center"}}>{props.isNew ? "Agregar Nuevo Usuario" : "Detalles de Usuario"}</h1>
                 <FormPageContainer>
 
                     <FormGroup>
