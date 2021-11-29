@@ -87,8 +87,9 @@ export const PerificoDetail = (props) => {
     
     const onSave = () => {
         if(props.isNew) {
+            console.log(periferico);
             createPerifericoApiCall({...periferico,
-                EquipoId: equipoIdUrlParam,
+                EquipoId: equipoIdUrlParam ? equipoIdUrlParam : periferico.EquipoId ,
             })
             .then( response => {
                 console.log(response);
@@ -105,18 +106,18 @@ export const PerificoDetail = (props) => {
         }
         else {
             console.log(periferico);
-            savePerifericoApiCall(periferico)
-            .then( response => {
-                setModalProps({
-                    ...modalProps,
-                    title: "¡Guardado!",
-                    show: true,
-                    type: "",
-                    message: "Periferico '" + periferico.PerifericoId + "' modificado con éxito",
-                    afterCloseModal: goBack
-                })
-            })
-            .catch(onError);
+            // savePerifericoApiCall(periferico)
+            // .then( response => {
+            //     setModalProps({
+            //         ...modalProps,
+            //         title: "¡Guardado!",
+            //         show: true,
+            //         type: "",
+            //         message: "Periferico '" + periferico.PerifericoId + "' modificado con éxito",
+            //         afterCloseModal: goBack
+            //     })
+            // })
+            // .catch(onError);
         }
     }
 
